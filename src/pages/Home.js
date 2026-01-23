@@ -1,0 +1,592 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+import { motion } from 'framer-motion';
+import { Button, Card, SectionHeading, HeroBeeSection } from '../components';
+import AnimationWrappers from '../components/Animations/AnimationWrappers';
+import founder1 from '../assets/founder1.jpg';
+import founder2 from '../assets/founder2.jpg';
+
+
+// Icons for solution areas
+const Icons = {
+  Automation: () => (
+    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+    </svg>
+  ),
+  Product: () => (
+    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+    </svg>
+  ),
+  Code: () => (
+    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+    </svg>
+  ),
+  AI: () => (
+    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+    </svg>
+  ),
+  Custom: () => (
+    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
+    </svg>
+  ),
+  Arrow: () => (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+    </svg>
+  ),
+};
+
+const Home = () => {
+  const solutionAreas = [
+    {
+      icon: Icons.Automation,
+      title: 'Business Automation',
+      description: 'Streamline your operations with intelligent automation for gyms, clinics, appointments, and attendance systems.',
+      link: '/solutions',
+      image: '/images/home-solutions-automation.jpg',
+    },
+    {
+      icon: Icons.Product,
+      title: 'Product Solutions',
+      description: 'Ready-to-deploy platforms like Bixxy Bee that transform how businesses manage their daily operations.',
+      link: '/products',
+      image: '/images/home-solutions-products.jpg',
+    },
+    {
+      icon: Icons.Code,
+      title: 'Custom Development',
+      description: 'Tailored web applications, dashboards, and internal tools built specifically for your business needs.',
+      link: '/services',
+      image: '/images/home-solutions-custom.jpg',
+    },
+    {
+      icon: Icons.AI,
+      title: 'AI & Digital Solutions',
+      description: 'Modern digital presence with AI-powered content, social media management, and automation-driven marketing.',
+      link: '/solutions',
+      image: '/images/home-solutions-ai.jpg',
+    },
+  ];
+
+  return (
+    <div className="pt-16 sm:pt-16 lg:pt-20">
+      <Helmet>
+        <title>Bixxy Bee | Intelligent Business Automation Solutions</title>
+        <meta name="description" content="Bixxy Bee builds intelligent automation solutions for gyms, clinics, and businesses. Custom software, AI solutions, and ready-to-deploy platforms that transform operations." />
+      </Helmet>
+
+      <HeroBeeSection />
+
+      {/* About Section */}
+      <section className="py-16 sm:py-20 lg:py-32 bg-bee-darker">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center">
+            {/* Content */}
+            <AnimationWrappers.SlideInLeft delay={0.2}>
+              <div>
+                <SectionHeading
+                  subtitle="Who We Are"
+                  title="More Than Just Development"
+                  align="left"
+                  className="mb-6"
+                />
+                <div className="space-y-4 text-bee-slate-400 text-base sm:text-lg leading-relaxed">
+                  <p>
+                    Bixxy Bee isn't your typical tech company. We're engineers, problem-solvers, and automation specialists focused on building solutions that actually work in the real world.
+                  </p>
+                  <p>
+                    Whether it's automating a gym's membership management, building a clinic's appointment system, or creating custom business toolsÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Âwe approach every project with the same commitment to quality and reliability.
+                  </p>
+                </div>
+                <div className="mt-6 sm:mt-8">
+                  <Button to="/how-we-work" variant="secondary" fullWidthMobile>
+                    Learn How We Work
+                    <Icons.Arrow />
+                  </Button>
+                </div>
+              </div>
+            </AnimationWrappers.SlideInLeft>
+
+            {/* Visual Element */}
+            <AnimationWrappers.SlideInRight delay={0.2}>
+              <div className="relative">
+                <motion.img
+                  src="/images/home-team.jpg"
+                  alt="Our team working"
+                  animate={{ y: [0, -15, 0] }}
+                  transition={{ duration: 4, repeat: Infinity }}
+                  className="w-full rounded-xl sm:rounded-2xl shadow-2xl object-cover h-80 sm:h-96 card-glow"
+                />
+                {/* Decorative element */}
+                <div className="absolute -bottom-4 -right-4 w-20 sm:w-24 h-20 sm:h-24 bg-bee-yellow/10 rounded-xl -z-10 hidden sm:block"></div>
+              </div>
+            </AnimationWrappers.SlideInRight>
+          </div>
+        </div>
+      </section>
+
+      {/* Solution Areas Section */}
+      <section className="py-16 sm:py-20 lg:py-32 bg-bee-dark">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            subtitle="What We Build"
+            title="Solutions That Drive Results"
+            description="From automation platforms to custom software, we deliver technology that transforms how your business operates."
+            className="mb-10 sm:mb-16"
+          />
+
+          <AnimationWrappers.StaggerContainer delay={0.1}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+              {solutionAreas.map((solution, index) => (
+                <AnimationWrappers.StaggerItem key={index}>
+                  <Link to={solution.link}>
+                    <motion.div
+                      whileHover={{ scale: 1.05, y: -10 }}
+                      transition={{ type: 'spring', stiffness: 300 }}
+                    >
+                      <Card className="h-full group cursor-pointer overflow-hidden">
+                        <div className="relative h-48 mb-4 -mx-6 -mt-6 mb-4 overflow-hidden rounded-lg">
+                          <img
+                            src={solution.image}
+                            alt={solution.title}
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-forge-dark via-transparent to-transparent opacity-40"></div>
+                        </div>
+                        <div
+                          className="text-bee-yellow mb-4 group-hover:text-bee-yellow-light transition-colors"
+                        >
+                          <solution.icon />
+                        </div>
+                        <h3 className="text-lg font-semibold text-bee-white-100 mb-2 group-hover:text-bee-yellow transition-colors">
+                          {solution.title}
+                        </h3>
+                        <p className="text-bee-slate-400 text-sm leading-relaxed">
+                          {solution.description}
+                        </p>
+                      </Card>
+                    </motion.div>
+                  </Link>
+                </AnimationWrappers.StaggerItem>
+              ))}
+            </div>
+          </AnimationWrappers.StaggerContainer>
+        </div>
+      </section>
+
+      {/* Featured Product Section */}
+      <section className="py-16 sm:py-20 lg:py-32 bg-bee-navy">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="relative overflow-hidden bg-gradient-to-br from-bee-slate-800 to-bee-darker border border-bee-slate-700/50 rounded-xl sm:rounded-2xl p-6 sm:p-8 lg:p-16 card-glow"
+          >
+            {/* Background Pattern - Reduced on mobile */}
+            <div className="absolute inset-0 bg-grid opacity-20 sm:opacity-30"></div>
+            <motion.div
+              animate={{ x: [0, 10, 0], y: [0, -10, 0] }}
+              transition={{ duration: 20, repeat: Infinity }}
+              className="absolute top-0 right-0 w-64 sm:w-80 lg:w-96 h-64 sm:h-80 lg:h-96 bg-bee-yellow/10 rounded-full blur-3xl hidden sm:block"
+            ></motion.div>
+
+            <div className="relative grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center">
+              <AnimationWrappers.SlideInLeft>
+                <div>
+                  <motion.span
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ delay: 0.2 }}
+                    viewport={{ once: true }}
+                    className="inline-block text-bee-yellow font-medium text-xs sm:text-sm tracking-wider uppercase mb-3 sm:mb-4"
+                  >
+                    Featured Product
+                  </motion.span>
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-bee-white mb-4 sm:mb-6">
+                    Bixxy Bee Platform
+                  </h2>
+                  <p className="text-bee-slate-400 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8">
+                    Our flagship automation platform designed for gyms and businesses. Manage memberships, track attendance, handle appointments, and streamline operationsÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Âall in one place.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                    <Button to="/products" size="lg" fullWidthMobile>
+                      Learn More
+                      <Icons.Arrow />
+                    </Button>
+                    <Button to="/contact" variant="outline" size="lg" fullWidthMobile>
+                      Request Demo
+                    </Button>
+                  </div>
+                </div>
+              </AnimationWrappers.SlideInLeft>
+
+              <AnimationWrappers.SlideInRight>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.2 }}
+                  viewport={{ once: true }}
+                  className="relative"
+                >
+                  <img
+                    src="/images/solutions-ai.jpg"
+                    alt="Bixxy Bee Platform"
+                    className="w-full rounded-lg shadow-2xl object-cover h-96"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-forge-dark via-transparent to-transparent opacity-30 rounded-lg"></div>
+                </motion.div>
+              </AnimationWrappers.SlideInRight>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Analytics & Metrics Section */}
+      <section className="py-16 sm:py-20 lg:py-32 bg-bee-navy">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            subtitle="Performance"
+            title="Data-Driven Results"
+            description="Real metrics and analytics that show the impact of our automation solutions."
+            className="mb-10 sm:mb-16"
+          />
+
+          <div className="grid lg:grid-cols-3 gap-8">
+            {/* Chart 1 */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
+              <div className="bg-gradient-to-br from-bee-slate-800/50 to-bee-navy/30 border border-bee-slate-700/50 rounded-xl overflow-hidden card-glow p-6">
+                <h3 className="text-lg font-semibold text-bee-white-100 mb-2">Performance Growth</h3>
+                <p className="text-bee-slate-400 text-sm">Average improvement across all metrics</p>
+              </div>
+            </motion.div>
+
+            {/* Metrics Visualization */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <div className="bg-gradient-to-br from-bee-slate-800/50 to-bee-navy/30 border border-bee-slate-700/50 rounded-xl overflow-hidden card-glow p-6">
+                <h3 className="text-lg font-semibold text-bee-white-100 mb-2">System Health</h3>
+                <p className="text-bee-slate-400 text-sm">Real-time monitoring and optimization</p>
+              </div>
+            </motion.div>
+
+            {/* Metrics Image */}
+            <AnimationWrappers.SlideInRight delay={0.1}>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                viewport={{ once: true }}
+                className="bg-gradient-to-br from-bee-slate-800/50 to-bee-navy/30 border border-bee-slate-700/50 rounded-xl overflow-hidden card-glow"
+              >
+                <img
+                  src="/images/services-dashboard.jpg"
+                  alt="Business Metrics"
+                  className="w-full h-64 object-cover"
+                />
+                <div className="p-6">
+                  <h3 className="text-lg font-semibold text-bee-white-100 mb-2">Business Intelligence</h3>
+                  <p className="text-bee-slate-400 text-sm">Actionable insights for growth</p>
+                </div>
+              </motion.div>
+            </AnimationWrappers.SlideInRight>
+          </div>
+
+          {/* Stats Row */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12">
+            {[
+              { value: '95%', label: 'Time Savings' },
+              { value: '10x', label: 'Faster Processing' },
+              { value: '99.9%', label: 'Uptime' },
+              { value: '24/7', label: 'Support' },
+            ].map((stat, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: i * 0.1 }}
+                viewport={{ once: true }}
+                className="text-center p-6 bg-bee-dark/50 rounded-lg border border-bee-slate-700/50"
+              >
+                <div className="text-2xl sm:text-3xl font-bold text-bee-yellow mb-2">{stat.value}</div>
+                <div className="text-sm text-bee-slate-400">{stat.label}</div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Our Work Preview Section */}
+      <section className="py-16 sm:py-20 lg:py-28 bg-bee-darker">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            subtitle="Our Work"
+            title="Real Solutions We've Built"
+            description="From our flagship product to internal automation projects and digital content."
+            className="mb-8 sm:mb-12"
+          />
+
+          <AnimationWrappers.StaggerContainer>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-10">
+              {/* Bixxy Bee Product */}
+              <AnimationWrappers.StaggerItem>
+                <Link to="/work">
+                  <motion.div
+                    whileHover={{ scale: 1.05, y: -5 }}
+                    transition={{ type: 'spring', stiffness: 300 }}
+                  >
+                    <Card className="h-full group cursor-pointer overflow-hidden">
+                      <div className="relative h-40 -mx-6 -mt-6 mb-4 overflow-hidden rounded-lg">
+                        <img
+                          src="/images/solutions-automation.jpg"
+                          alt="Bixxy Bee Platform"
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        />
+                      </div>
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{ delay: 0.1 }}
+                        viewport={{ once: true }}
+                        className="flex items-center gap-2 mb-4"
+                      >
+                        <span className="px-2 py-1 bg-bee-yellow/10 border border-bee-yellow/20 rounded text-xs text-bee-yellow font-medium">
+                          Product
+                        </span>
+                      </motion.div>
+                      <h3 className="text-lg font-semibold text-bee-white-100 mb-2 group-hover:text-bee-yellow transition-colors">
+                        Bixxy Bee Platform
+                      </h3>
+                      <p className="text-bee-slate-400 text-sm leading-relaxed">
+                        Gym and business automation platform handling memberships, check-ins, and scheduling.
+                      </p>
+                    </Card>
+                  </motion.div>
+                </Link>
+              </AnimationWrappers.StaggerItem>
+
+              {/* Internal Projects */}
+              <AnimationWrappers.StaggerItem>
+                <Link to="/work">
+                  <motion.div
+                    whileHover={{ scale: 1.05, y: -5 }}
+                    transition={{ type: 'spring', stiffness: 300 }}
+                  >
+                    <Card className="h-full group cursor-pointer overflow-hidden">
+                      <div className="relative h-40 -mx-6 -mt-6 mb-4 overflow-hidden rounded-lg">
+                        <img
+                          src="/images/howwework-project-1.jpg"
+                          alt="Automation Projects"
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        />
+                      </div>
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{ delay: 0.2 }}
+                        viewport={{ once: true }}
+                        className="flex items-center gap-2 mb-4"
+                      >
+                        <span className="px-2 py-1 bg-bee-slate-700 border border-bee-slate-700 rounded text-xs text-bee-slate-400">
+                          Internal Work
+                        </span>
+                      </motion.div>
+                      <h3 className="text-lg font-semibold text-bee-white-100 mb-2 group-hover:text-bee-yellow transition-colors">
+                        Automation Projects
+                      </h3>
+                      <p className="text-bee-slate-400 text-sm leading-relaxed">
+                        Clinic appointments, attendance systems, and workflow automation frameworks.
+                      </p>
+                    </Card>
+                  </motion.div>
+                </Link>
+              </AnimationWrappers.StaggerItem>
+
+              {/* Digital & AI */}
+              <AnimationWrappers.StaggerItem>
+                <Link to="/work">
+                  <motion.div
+                    whileHover={{ scale: 1.05, y: -5 }}
+                    transition={{ type: 'spring', stiffness: 300 }}
+                  >
+                    <Card className="h-full group cursor-pointer overflow-hidden">
+                      <div className="relative h-40 -mx-6 -mt-6 mb-4 overflow-hidden rounded-lg">
+                        <img
+                          src="/images/solutions-custom.jpg"
+                          alt="Digital & AI Work"
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        />
+                      </div>
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{ delay: 0.3 }}
+                        viewport={{ once: true }}
+                        className="flex items-center gap-2 mb-4"
+                      >
+                        <span className="px-2 py-1 bg-purple-500/10 border border-purple-500/20 rounded text-xs text-purple-400">
+                          Digital
+                        </span>
+                      </motion.div>
+                      <h3 className="text-lg font-semibold text-bee-white-100 mb-2 group-hover:text-bee-yellow transition-colors">
+                        Digital & AI Work
+                      </h3>
+                      <p className="text-bee-slate-400 text-sm leading-relaxed">
+                        AI videos, social media content, and automation-driven creative workflows.
+                      </p>
+                    </Card>
+                  </motion.div>
+                </Link>
+              </AnimationWrappers.StaggerItem>
+            </div>
+          </AnimationWrappers.StaggerContainer>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            viewport={{ once: true }}
+            className="text-center"
+          >
+            <Button to="/work" variant="outline" fullWidthMobile>
+              View All Work
+              <Icons.Arrow />
+            </Button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Meet the Founders Section */}
+      <section className="py-16 sm:py-20 lg:py-28 bg-bee-dark">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            subtitle="The Team"
+            title="Meet the Founders"
+            description="The people behind Bixxy Bee, committed to building technology that works."
+            className="mb-10 sm:mb-14"
+          />
+
+          <AnimationWrappers.StaggerContainer>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
+              {/* Founder 1 */}
+              <AnimationWrappers.StaggerItem>
+                <motion.div
+                  whileHover={{ scale: 1.03, y: -10 }}
+                  transition={{ type: 'spring', stiffness: 300 }}
+                  className="group bg-gradient-to-br from-bee-slate-800/50 to-bee-navy/30 border border-bee-slate-700/50 rounded-xl sm:rounded-2xl p-6 sm:p-8 hover:border-bee-yellow/30 transition-all duration-300"
+                >
+                  <div className="flex flex-col items-center text-center">
+                    <motion.div
+                      animate={{ y: [0, -10, 0] }}
+                      transition={{ duration: 3, repeat: Infinity }}
+                      className="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-bee-slate-600/50 border-2 border-bee-slate-600/50 overflow-hidden mb-5 group-hover:border-bee-yellow/40 transition-colors"
+                    >
+                      <img src={founder1} alt="Shvang Jagwan" className="w-full h-full object-cover" />
+                    </motion.div>
+                    <h3 className="text-xl sm:text-2xl font-semibold text-bee-white mb-1">
+                      Shvang Jagwan
+                    </h3>
+                    <p className="text-bee-yellow font-medium text-sm sm:text-base mb-3">
+                      Co-Founder & Engineering
+                    </p>
+                    <p className="text-bee-slate-400 text-sm sm:text-base leading-relaxed max-w-xs">
+                      Focused on building scalable automation solutions and turning complex business problems into elegant software.
+                    </p>
+                  </div>
+                </motion.div>
+              </AnimationWrappers.StaggerItem>
+
+              {/* Founder 2 */}
+              <AnimationWrappers.StaggerItem>
+                <motion.div
+                  whileHover={{ scale: 1.03, y: -10 }}
+                  transition={{ type: 'spring', stiffness: 300 }}
+                  className="group bg-gradient-to-br from-bee-slate-800/50 to-bee-navy/30 border border-bee-slate-700/50 rounded-xl sm:rounded-2xl p-6 sm:p-8 hover:border-bee-yellow/30 transition-all duration-300"
+                >
+                  <div className="flex flex-col items-center text-center">
+                    <motion.div
+                      animate={{ y: [0, -10, 0] }}
+                      transition={{ duration: 3, delay: 0.5, repeat: Infinity }}
+                      className="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-bee-slate-600/50 border-2 border-bee-slate-600/50 overflow-hidden mb-5 group-hover:border-bee-yellow/40 transition-colors"
+                    >
+                      <img src={founder2} alt="Anagd Singh" className="w-full h-full object-cover" />
+                    </motion.div>
+                    <h3 className="text-xl sm:text-2xl font-semibold text-bee-white mb-1">
+                      Anagd Singh
+                    </h3>
+                    <p className="text-bee-yellow font-medium text-sm sm:text-base mb-3">
+                      Co-Founder & Operations
+                    </p>
+                    <p className="text-bee-slate-400 text-sm sm:text-base leading-relaxed max-w-xs">
+                      Driving business strategy and ensuring every solution delivers real value to our clients.
+                    </p>
+                  </div>
+                </motion.div>
+              </AnimationWrappers.StaggerItem>
+            </div>
+          </AnimationWrappers.StaggerContainer>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-16 sm:py-20 lg:py-32 bg-bee-navy">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center max-w-3xl mx-auto"
+          >
+            <SectionHeading
+              subtitle="Ready to Start?"
+              title="Let's Build Something Together"
+              description="Whether you have a specific project in mind or want to explore how automation can help your business, we're here to help."
+              className="mb-8 sm:mb-10"
+            />
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+              viewport={{ once: true }}
+              className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4"
+            >
+              <Button to="/contact" size="lg" fullWidthMobile>
+                Contact Us
+                <Icons.Arrow />
+              </Button>
+              <Button
+                href="https://wa.me/7818874934"
+                variant="secondary"
+                size="lg"
+                fullWidthMobile
+              >
+                <svg className="w-5 h-5 mr-2 text-green-500" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                </svg>
+                WhatsApp Us
+              </Button>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default Home;

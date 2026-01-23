@@ -1,0 +1,76 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+const Button = ({
+  children,
+  variant = 'primary',
+  size = 'md',
+  to,
+  href,
+  onClick,
+  className = '',
+  disabled = false,
+  type = 'button',
+  fullWidthMobile = false,
+  ...props
+}) => {
+  const baseStyles = 'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98]';
+
+  const variants = {
+    primary: 'bg-bee-yellow hover:bg-bee-yellow-dark active:bg-bee-yellow-dark text-bee-black focus:ring-bee-yellow font-bold shadow-lg shadow-bee-yellow/30 hover:shadow-bee-yellow/50',
+    secondary: 'bg-white/70 hover:bg-white/90 active:bg-white text-slate-900 border border-slate-200 hover:border-amber-300/60 focus:ring-amber-300/60 shadow-sm',
+    outline: 'bg-transparent hover:bg-bee-yellow/10 active:bg-bee-yellow/20 text-bee-yellow border-2 border-bee-yellow hover:border-bee-yellow-dark focus:ring-bee-yellow',
+    ghost: 'bg-transparent hover:bg-amber-100/60 active:bg-amber-100 text-slate-700 hover:text-amber-800 focus:ring-amber-300/60',
+  };
+
+  // Sizes with minimum 44px height for touch targets on mobile
+  const sizes = {
+    sm: 'px-3 py-2 text-sm min-h-[40px] sm:min-h-0 sm:py-1.5',
+    md: 'px-4 sm:px-5 py-2.5 sm:py-2.5 text-sm min-h-[44px]',
+    lg: 'px-5 sm:px-6 py-3 sm:py-3 text-base min-h-[48px]',
+    xl: 'px-6 sm:px-8 py-3.5 sm:py-4 text-base sm:text-lg min-h-[52px]',
+  };
+
+  const mobileWidth = fullWidthMobile ? 'w-full sm:w-auto' : '';
+
+  const combinedClassName = `${baseStyles} ${variants[variant]} ${sizes[size]} ${mobileWidth} ${className}`;
+
+  // Render as Link if "to" prop is provided (internal navigation)
+  if (to) {
+    return (
+      <Link to={to} className={combinedClassName} {...props}>
+        {children}
+      </Link>
+    );
+  }
+
+  // Render as anchor if "href" prop is provided (external link)
+  if (href) {
+    return (
+      <a
+        href={href}
+        className={combinedClassName}
+        target="_blank"
+        rel="noopener noreferrer"
+        {...props}
+      >
+        {children}
+      </a>
+    );
+  }
+
+  // Render as button by default
+  return (
+    <button
+      type={type}
+      className={combinedClassName}
+      onClick={onClick}
+      disabled={disabled}
+      {...props}
+    >
+      {children}
+    </button>
+  );
+};
+
+export default Button;
