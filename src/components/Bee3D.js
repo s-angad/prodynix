@@ -40,7 +40,9 @@ export function Bee3D(props) {
       if (!child.isMesh) return;
 
       child.castShadow = true;
-      child.receiveShadow = true;
+      // Receiving shadows on a skinned/animated mesh is expensive.
+      // Keep castShadow for the same scene look, but disable receiveShadow for performance.
+      child.receiveShadow = false;
 
 
       const apply = (material) => {

@@ -97,12 +97,12 @@ const Home = () => {
                   align="left"
                   className="mb-6"
                 />
-                <div className="space-y-4 text-bee-slate-400 text-base sm:text-lg leading-relaxed">
+                <div className="space-y-4 text-secondary text-base sm:text-lg leading-relaxed">
                   <p>
                     Bixxy Bee isn't your typical tech company. We're engineers, problem-solvers, and automation specialists focused on building solutions that actually work in the real world.
                   </p>
                   <p>
-                    Whether it's automating a gym's membership management, building a clinic's appointment system, or creating custom business toolsÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Âwe approach every project with the same commitment to quality and reliability.
+                    Whether it's automating a gym's membership management, building a clinic's appointment system, or creating custom business tools—we approach every project with the same commitment to quality and reliability.
                   </p>
                 </div>
                 <div className="mt-6 sm:mt-8">
@@ -165,10 +165,10 @@ const Home = () => {
                         >
                           <solution.icon />
                         </div>
-                        <h3 className="text-lg font-semibold text-bee-white-100 mb-2 group-hover:text-bee-yellow transition-colors">
+                        <h3 className="text-heading text-lg font-bold mb-3 group-hover:text-bee-yellow transition-colors">
                           {solution.title}
                         </h3>
-                        <p className="text-bee-slate-400 text-sm leading-relaxed">
+                        <p className="text-secondary text-sm leading-relaxed">
                           {solution.description}
                         </p>
                       </Card>

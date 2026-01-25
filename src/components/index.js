@@ -6,3 +6,5 @@ export { default as Card } from './Card';
 export { default as SectionHeading } from './SectionHeading';
 export { default as Bee3D } from './Bee3D';
 export { default as HeroBeeSection } from './HeroBeeSection';
+export { default as HoneycombStructure } from './HoneycombStructure';
+export { default as HoneycombClusters } from './HoneycombClusters';

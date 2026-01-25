@@ -17,10 +17,10 @@ const Button = ({
   const baseStyles = 'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98]';
 
   const variants = {
-    primary: 'bg-bee-yellow hover:bg-bee-yellow-dark active:bg-bee-yellow-dark text-bee-black focus:ring-bee-yellow font-bold shadow-lg shadow-bee-yellow/30 hover:shadow-bee-yellow/50',
-    secondary: 'bg-white/70 hover:bg-white/90 active:bg-white text-slate-900 border border-slate-200 hover:border-amber-300/60 focus:ring-amber-300/60 shadow-sm',
-    outline: 'bg-transparent hover:bg-bee-yellow/10 active:bg-bee-yellow/20 text-bee-yellow border-2 border-bee-yellow hover:border-bee-yellow-dark focus:ring-bee-yellow',
-    ghost: 'bg-transparent hover:bg-amber-100/60 active:bg-amber-100 text-slate-700 hover:text-amber-800 focus:ring-amber-300/60',
+    primary: 'glass-panel bg-gradient-to-br from-bee-yellow to-bee-amber hover:from-bee-amber hover:to-bee-yellow text-bee-dark focus:ring-bee-yellow/50 shadow-lg hover:shadow-xl hover:floating-layer border border-amber-300/50 font-bold',
+    secondary: 'glass-panel hover:floating-layer text-bee-dark border border-bee-yellow/40 focus:ring-bee-yellow/30 shadow-sm',
+    outline: 'bg-transparent hover:glass-panel hover:bg-bee-yellow/10 active:bg-bee-yellow/20 text-bee-yellow border-2 border-bee-yellow hover:border-bee-yellow-dark focus:ring-bee-yellow',
+    ghost: 'text-bee-dark hover:glass-panel hover:border hover:border-bee-yellow/30 focus:ring-bee-yellow/30',
   };
 
   // Sizes with minimum 44px height for touch targets on mobile

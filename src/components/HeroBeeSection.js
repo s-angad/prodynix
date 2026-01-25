@@ -5,18 +5,25 @@ import * as THREE from 'three';
 
 import Bee3D from './Bee3D';
 import Button from './Button';
+import HoneycombClusters from './HoneycombClusters';
 
 const HeroBeeSection = () => {
   return (
-    <section className="relative h-screen w-full overflow-visible bg-hero-gradient bg-grid">
-      {/* Full-screen 3D background */}
-      <div className="absolute inset-0 -z-0 overflow-visible" style={{ zIndex: 110 }}>
+    <section className="relative h-screen w-full overflow-visible canvas-chamber">
+      {/* Three.js Canvas Layer (z-10) */}
+      <div className="absolute inset-0 z-10 overflow-visible pointer-events-none glass-panel honeycomb-stage">
+        {/* Honeycomb clusters (canvas-only): visible over canvas, under hero text */}
+        <div className="absolute inset-0 z-[30]" aria-hidden="true">
+          <HoneycombClusters />
+        </div>
+
+        <div className="absolute inset-0 z-10">
         <Canvas 
           shadows
-          gl={{ antialias: true, alpha: true, toneMapping: THREE.ACESFilmicToneMapping }}
-          dpr={[1, 2]}
+          gl={{ antialias: true, alpha: true, powerPreference: 'high-performance', toneMapping: THREE.ACESFilmicToneMapping }}
+          dpr={[1, 1.25]}
           camera={{ position: [0, 1.2, 5], fov: 50 }}
-          style={{ width: '100%', height: '100%',  background: 'transparent' }}
+          style={{ width: '100%', height: '100%', pointerEvents: 'auto' }}
         >
           <PerspectiveCamera makeDefault position={[0, 1.2, 5]} fov={50} />
 
@@ -42,8 +49,8 @@ const HeroBeeSection = () => {
             position={[6, 6, 6]}
             intensity={2.2}
             castShadow
-            shadow-mapSize-width={1024}
-            shadow-mapSize-height={1024}
+            shadow-mapSize-width={512}
+            shadow-mapSize-height={512}
             shadow-camera-near={0.5}
             shadow-camera-far={25}
             shadow-camera-left={-6}
@@ -59,10 +66,11 @@ const HeroBeeSection = () => {
             <shadowMaterial opacity={0.2} />
           </mesh>
         </Canvas>
+        </div>
       </div>
 
       {/* Foreground content */}
-      <div className="relative z-100 flex h-full items-center pointer-events-none">
+      <div className="relative z-20 flex h-full items-center pointer-events-none">
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
           <div className="max-w-2xl">
             {/* Badge */}

@@ -15,13 +15,49 @@ html {
 }
 
 body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background-color: #ffffff;
-  color: #0f172a;
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: linear-gradient(135deg, #fafaf9 0%, #f7f3ed 50%, #fef9f1 100%);
+  background-attachment: fixed;
+  color: #2c2c2c;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  font-weight: 400;
+  letter-spacing: -0.3px;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  color: #1a1a1a;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+h1 { font-size: 3rem; }
+h2 { font-size: 2.25rem; }
+h3 { font-size: 1.875rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
+
+/* Paragraph text */
+p {
+  color: #4a4a4a;
+  font-weight: 400;
+  line-height: 1.75;
+}
+
+/* Links */
+a {
+  color: #c9860f;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #a36f0a;
 }
 
 /* Prevent horizontal scroll */
@@ -36,29 +72,29 @@ body {
   }
 
   ::-webkit-scrollbar-track {
-    background: #f6f7fb;
+    background: #f5f1ed;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #FFD700;
+    background: #c9860f;
     border-radius: 3px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #FFC700;
+    background: #a36f0a;
   }
 }
 
 /* Selection styling */
 ::selection {
-  background-color: rgba(255, 215, 0, 0.25);
-  color: #0f172a;
+  background-color: rgba(201, 134, 15, 0.2);
+  color: #1a1a1a;
 }
 
 /* Focus states - larger for touch devices */
 a:focus,
 button:focus {
-  outline: 2px solid #FFD700;
+  outline: 2px solid #c9860f;
   outline-offset: 2px;
 }
 
@@ -146,6 +182,151 @@ body.menu-open {
 
 /* Utility classes */
 @layer utilities {
+  /* 3D Honeycomb Structure Styles */
+  .honeycomb-3d-structure {
+    perspective: 1200px;
+    perspective-origin: 50% 50%;
+    transform-style: preserve-3d;
+  }
+
+  .hex-panel {
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+  }
+
+  /* Premium Material Styles */
+  .glass-panel {
+    background: linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.95) 0%, 
+      rgba(255, 251, 240, 0.92) 50%, 
+      rgba(254, 243, 216, 0.90) 100%);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    box-shadow: 
+      0 8px 32px rgba(15, 23, 42, 0.08),
+      0 2px 8px rgba(209, 154, 0, 0.06),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8),
+      inset 0 -1px 0 rgba(15, 23, 42, 0.05);
+  }
+
+  .carved-hex {
+    background: linear-gradient(145deg, #ffffff 0%, #fefcf7 100%);
+    box-shadow: 
+      12px 12px 24px rgba(15, 23, 42, 0.08),
+      -12px -12px 24px rgba(255, 255, 255, 0.9),
+      inset 2px 2px 4px rgba(15, 23, 42, 0.04),
+      inset -2px -2px 4px rgba(255, 255, 255, 0.5);
+  }
+
+  .floating-layer {
+    transform: translateZ(100px);
+    box-shadow: 
+      0 40px 80px rgba(15, 23, 42, 0.22),
+      0 20px 40px rgba(209, 154, 0, 0.12),
+      0 0 0 1px rgba(255, 255, 255, 0.6);
+  }
+
+  .depth-layer-1 { transform: translateZ(50px); }
+  .depth-layer-2 { transform: translateZ(100px); }
+  .depth-layer-3 { transform: translateZ(150px); }
+
+  /* Ambient background glow */
+  .ambient-glow {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(ellipse 1600px 1000px at 20% 30%, rgba(201, 134, 15, 0.10), transparent 60%),
+      radial-gradient(ellipse 1400px 900px at 80% 60%, rgba(161, 107, 8, 0.08), transparent 65%),
+      radial-gradient(ellipse 1800px 1200px at 50% 50%, rgba(255, 255, 255, 0.2), transparent 70%);
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    animation: ambient-pulse 20s ease-in-out infinite;
+  }
+
+  @keyframes ambient-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+  }
+
+  /* Canvas integration layer */
+  .canvas-chamber {
+    perspective: 1800px;
+    perspective-origin: 50% 50%;
+    transform-style: preserve-3d;
+  }
+
+  /* Text Color Improvements - Ensure readability on light backgrounds */
+  .text-heading {
+    color: #0a0e27 !important;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+
+  .text-primary {
+    color: #0f172a !important;
+    font-weight: 500;
+  }
+
+  .text-secondary {
+    color: #1f2937 !important;
+    font-weight: 400;
+  }
+
+  .text-muted {
+    color: #4b5563 !important;
+    font-weight: 400;
+  }
+
+  .text-accent {
+    color: #d19a00 !important;
+    font-weight: 600;
+  }
+
+  .text-light {
+    color: #6b7280 !important;
+    font-weight: 400;
+  }
+
+  /* Section title styling */
+  .section-title {
+    color: #0a0e27 !important;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+  }
+
+  /* Subtitle styling */
+  .subtitle {
+    color: #d19a00 !important;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* Improve all dark text utilities */
+  .text-bee-dark {
+    color: #0a0e27 !important;
+  }
+
+  .text-bee-slate-800 {
+    color: #1f2937 !important;
+  }
+
+  .text-bee-slate-700 {
+    color: #374151 !important;
+  }
+
+  .text-bee-slate-600 {
+    color: #4b5563 !important;
+  }
+
+  .text-bee-slate-400 {
+    color: #6b7280 !important;
+  }
+
   /*
     Light theme overrides for existing Tailwind color utilities.
     This lets us flip the site to a white/honey palette without rewriting every class.
@@ -174,70 +355,91 @@ body.menu-open {
   .via-bee-navy { --tw-gradient-stops: var(--tw-gradient-from), rgba(255, 250, 240, 0.86), var(--tw-gradient-to) !important; }
   .via-bee-dark { --tw-gradient-stops: var(--tw-gradient-from), rgba(255, 255, 255, 0.92), var(--tw-gradient-to) !important; }
 
-  /* Honeycomb maze background (replaces the old flat grid) */
+  /* Honeycomb maze background - minimal corner accents */
   .honeymaze-bg {
     position: fixed;
     inset: 0;
     z-index: 0;
     pointer-events: none;
-
-    /* "carved into glass" base */
     background-color: #ffffff;
-    background-image:
-      radial-gradient(1000px 520px at 70% 20%, rgba(255, 215, 0, 0.12), transparent 60%),
-      radial-gradient(900px 540px at 25% 75%, rgba(255, 179, 0, 0.10), transparent 62%),
-      /* shadow/emboss pass (slight offset) */
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='312' viewBox='0 0 360 312'%3E%3Cg fill='none' stroke='%230f172a' stroke-opacity='0.09' stroke-width='1.6'%3E%3Cpath d='M80 26 L140 26 L170 78 L140 130 L80 130 L50 78 Z'/%3E%3Cpath d='M170 78 L230 78 L260 130 L230 182 L170 182 L140 130 Z'/%3E%3Cpath d='M80 182 L140 182 L170 234 L140 286 L80 286 L50 234 Z'/%3E%3Cpath d='M230 26 L290 26 L320 78 L290 130 L230 130 L200 78 Z'/%3E%3Cpath d='M20 78 L80 78 L110 130 L80 182 L20 182 L-10 130 Z'/%3E%3Cpath d='M200 182 L260 182 L290 234 L260 286 L200 286 L170 234 Z'/%3E%3Cpath d='M110 130 L140 130'/%3E%3Cpath d='M200 78 L230 78'/%3E%3Cpath d='M50 234 L80 234'/%3E%3Cpath d='M260 130 L290 130'/%3E%3C/g%3E%3Cg fill='none' stroke='%23d19a00' stroke-opacity='0.06' stroke-width='2'%3E%3Cpath d='M140 26 L170 78'/%3E%3Cpath d='M230 182 L200 234'/%3E%3Cpath d='M80 130 L50 78'/%3E%3Cpath d='M290 130 L320 78'/%3E%3C/g%3E%3C/svg%3E"),
-      /* highlight pass */
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='312' viewBox='0 0 360 312'%3E%3Cg fill='none' stroke='%23f1d98c' stroke-opacity='0.28' stroke-width='1'%3E%3Cpath d='M80 26 L140 26 L170 78 L140 130 L80 130 L50 78 Z'/%3E%3Cpath d='M170 78 L230 78 L260 130 L230 182 L170 182 L140 130 Z'/%3E%3Cpath d='M80 182 L140 182 L170 234 L140 286 L80 286 L50 234 Z'/%3E%3Cpath d='M230 26 L290 26 L320 78 L290 130 L230 130 L200 78 Z'/%3E%3Cpath d='M20 78 L80 78 L110 130 L80 182 L20 182 L-10 130 Z'/%3E%3Cpath d='M200 182 L260 182 L290 234 L260 286 L200 286 L170 234 Z'/%3E%3C/g%3E%3Cg fill='none' stroke='%23d19a00' stroke-opacity='0.12' stroke-width='2'%3E%3Cpath d='M92 42 L124 42'/%3E%3Cpath d='M186 96 L214 96'/%3E%3Cpath d='M242 152 L254 152'/%3E%3Cpath d='M64 210 L92 210'/%3E%3C/g%3E%3C/svg%3E");
-
-    /* Make it feel less like a perfect repeating grid */
-    background-size:
-      auto,
-      auto,
-      520px 451px,
-      520px 451px;
-    background-position:
-      center,
-      center,
-      14px 18px,
-      0 0;
-    background-repeat:
-      no-repeat,
-      no-repeat,
-      repeat,
-      repeat;
-
     opacity: 1;
-    filter: saturate(1.02);
-
-    /* Gentle edge falloff (keeps content readable) */
-    -webkit-mask-image: radial-gradient(1200px 700px at 50% 40%, #000 55%, transparent 100%);
-    mask-image: radial-gradient(1200px 700px at 50% 40%, #000 55%, transparent 100%);
-
-    /* Ultra-slow drift for life (CPU-friendly) */
-    animation: honeymaze-drift 120s linear infinite;
   }
 
-  @keyframes honeymaze-drift {
-    0% {
-      background-position: center, center, 14px 18px, 0 0;
-    }
-    100% {
-      background-position: center, center, 114px 88px, 96px 76px;
-    }
+  /* Small decorative hex - top right corner */
+  .honeymaze-bg::before {
+    content: '';
+    position: fixed;
+    top: 5%;
+    right: 3%;
+    width: 140px;
+    height: 140px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,15 80,35 80,65 50,85 20,65 20,35' fill='none' stroke='%23d19a00' stroke-width='1.5' stroke-opacity='0.22'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Small decorative hex - bottom left corner */
+  .honeymaze-bg::after {
+    content: '';
+    position: fixed;
+    bottom: 8%;
+    left: 2%;
+    width: 120px;
+    height: 120px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,15 80,35 80,65 50,85 20,65 20,35' fill='none' stroke='%23ffd700' stroke-width='1.2' stroke-opacity='0.18'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    z-index: 0;
   }
 
   @media (max-width: 640px) {
-    .honeymaze-bg {
-      background-size: auto, auto, 420px 364px, 420px 364px;
-      -webkit-mask-image: radial-gradient(900px 560px at 50% 36%, #000 58%, transparent 100%);
-      mask-image: radial-gradient(900px 560px at 50% 36%, #000 58%, transparent 100%);
+    .honeymaze-bg::before {
+      width: 100px;
+      height: 100px;
+      top: 10%;
+      right: 5%;
+    }
+    .honeymaze-bg::after {
+      width: 80px;
+      height: 80px;
+      bottom: 15%;
+      left: 5%;
+    }
+  }
+
+  /* Canvas integration layer */
+  .canvas-chamber {
+    perspective: 1800px;
+    perspective-origin: 50% 50%;
+    transform-style: preserve-3d;
+  }
+
+  @media (max-width: 768px) {
+    .honeycomb-room-container {
+      perspective: 800px;
+    }
+    .honeycomb-floor {
+      transform: rotateX(70deg) translateZ(-300px);
+    }
+    .honeycomb-wall-back {
+      transform: translateZ(-400px);
+    }
+    .honeycomb-wall-left,
+    .honeycomb-wall-right {
+      display: none; /* Hide side walls on mobile for cleaner look */
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .honeymaze-bg { animation: none; }
+    .honeycomb-floor,
+    .honeycomb-wall-back,
+    .honeycomb-wall-left,
+    .honeycomb-wall-right {
+      transform: none !important;
+    }
   }
 
   .text-gradient {
@@ -256,20 +458,18 @@ body.menu-open {
   }
 
   .bg-grid {
-    /* Subtle hex/maze linework + soft honey glow (premium, not cartoonish) */
+    /* Clean subtle gradients only - no repeating pattern to avoid text obstruction */
     background-image:
-      radial-gradient(900px 500px at 70% 30%, rgba(255, 215, 0, 0.12), transparent 60%),
-      radial-gradient(900px 500px at 25% 80%, rgba(255, 179, 0, 0.10), transparent 60%),
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='104' viewBox='0 0 120 104'%3E%3Cg fill='none' stroke='%23f1d98c' stroke-opacity='0.22' stroke-width='1'%3E%3Cpath d='M30 2 L90 2 L118 52 L90 102 L30 102 L2 52 Z'/%3E%3Cpath d='M90 2 L150 2 L178 52 L150 102 L90 102 L62 52 Z'/%3E%3Cpath d='M-30 2 L30 2 L58 52 L30 102 L-30 102 L-58 52 Z'/%3E%3Cpath d='M30 -50 L90 -50 L118 0 L90 50 L30 50 L2 0 Z'/%3E%3Cpath d='M30 54 L90 54 L118 104 L90 154 L30 154 L2 104 Z'/%3E%3C/g%3E%3Cg fill='none' stroke='%23d19a00' stroke-opacity='0.10' stroke-width='2'%3E%3Cpath d='M30 2 L90 2'/%3E%3Cpath d='M90 102 L30 102'/%3E%3C/g%3E%3C/svg%3E");
-    background-size: auto, auto, 240px 208px;
-    background-position: center, center, 0 0;
-    background-repeat: no-repeat, no-repeat, repeat;
+      radial-gradient(900px 500px at 70% 30%, rgba(255, 215, 0, 0.08), transparent 60%),
+      radial-gradient(900px 500px at 25% 80%, rgba(255, 179, 0, 0.06), transparent 60%);
+    background-size: auto, auto;
+    background-position: center, center;
+    background-repeat: no-repeat;
   }
 
-  /* Smaller grid on mobile */
   @media (max-width: 640px) {
     .bg-grid {
-      background-size: auto, auto, 200px 174px;
+      background-size: auto, auto;
     }
   }
 
@@ -365,5 +565,84 @@ body.menu-open {
   /* Touch-friendly spacing */
   .touch-spacing {
     @apply space-y-3 sm:space-y-2;
+  }
+}
+
+/* Static Honeycomb Clusters - Embedded in page flow */
+/**
+ * HONEYCOMB CLUSTERS - Static architectural elements
+ * 
+ * Design principles:
+ * - Scrolls naturally with page content
+ * - No scroll listeners or parallax
+ * - Fixed, deterministic positioning
+ * - Subtle 3D depth without motion
+ * - Low opacity to avoid competing with content
+ */
+
+.honeycomb-clusters-container {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Ensure honeycomb overlays read clearly over WebGL */
+.honeycomb-stage {
+  isolation: isolate;
+}
+
+.honeycomb-clusters-container {
+  opacity: 1;
+}
+
+.honeycomb-cluster {
+  position: absolute;
+  pointer-events: none;
+  will-change: auto;
+}
+
+.honeycomb-svg {
+  width: auto;
+  height: auto;
+  display: block;
+  overflow: visible;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  paint-order: stroke;
+  opacity: 0.98;
+}
+
+/* 3D perspective for hexagon depth */
+.honeycomb-svg g {
+  transform-style: preserve-3d;
+}
+
+/* Hardware acceleration for transforms */
+.honeycomb-cluster {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Respect motion preferences - disable 3D on reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .honeycomb-cluster {
+    transform: none !important;
+  }
+
+  .honeycomb-svg {
+    transform: none !important;
+  }
+}
+
+
+
+/* Print optimization - hide honeycomb */
+@media print {
+  .honeycomb-clusters-container {
+    display: none;
   }
 }
