@@ -8,15 +8,17 @@ module.exports = {
     extend: {
       colors: {
         // Bixxy Bee dark backgrounds
-        'bee-dark': '#0f0f0f',
-        'bee-darker': '#000000',
-        'bee-navy': '#1a1a1a',
+        // Use deep navy/charcoal (avoid pure black) for a premium, calmer contrast.
+        'bee-dark': '#0b1220',
+        'bee-darker': '#070b12',
+        'bee-navy': '#111827',
         // Yellow accents - bright and energetic
         'bee-yellow': '#FFD700',
         'bee-yellow-dark': '#FFC700',
         'bee-yellow-light': '#FFEA4D',
         // Black and white
-        'bee-black': '#000000',
+        // Avoid pure black in UI surfaces; keep near-black for text/ink.
+        'bee-black': '#0b0f16',
         'bee-white': '#FFFFFF',
         'bee-white-100': '#FFFFFF',
         'bee-white-50': '#F9FAFB',

@@ -18,8 +18,8 @@ const Card = ({
     <div
       className={`
         relative overflow-hidden rounded-2xl
-        glass-panel border border-white/60 card-glow
-        ${hover ? 'transition-all duration-500 hover:shadow-2xl hover:floating-layer hover:border-bee-yellow/40' : ''}
+        glass-panel card-surface border border-white/60 card-glow
+        ${hover ? 'transition-all duration-500 hover:shadow-lg hover:floating-layer hover:border-bee-yellow/40' : ''}
         ${paddingClasses[padding]}
         ${className}
       `}

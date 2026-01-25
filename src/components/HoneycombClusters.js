@@ -312,18 +312,18 @@ const HoneycombClusters = () => {
           <polygon
             points={polygonPoints}
             fill={`url(#${gradientId})`}
-            fillOpacity="0.72"
-            stroke="#b56f06"
+            fillOpacity="var(--honeycomb-fill-opacity, 0.72)"
+            stroke="var(--honeycomb-stroke, #b56f06)"
             strokeWidth="1.6"
-            strokeOpacity="0.84"
+            strokeOpacity="var(--honeycomb-stroke-opacity, 0.84)"
           />
 
           <polygon
             points={polygonPoints}
             fill="none"
-            stroke="#ffffff"
+            stroke="var(--honeycomb-highlight, #ffffff)"
             strokeWidth="1.0"
-            strokeOpacity="0.36"
+            strokeOpacity="var(--honeycomb-highlight-opacity, 0.36)"
           />
         </g>
       );
@@ -359,7 +359,7 @@ const HoneycombClusters = () => {
       const styleProps = {
         position: 'absolute',
         pointerEvents: 'none',
-        opacity: group.opacity,
+        opacity: `calc(var(--honeycomb-opacity-mult, 1) * ${group.opacity})`,
         zIndex: 15,
       };
       
@@ -393,9 +393,9 @@ const HoneycombClusters = () => {
                 x2="100%"
                 y2="100%"
               >
-                <stop offset="0%" stopColor="#ffffff" stopOpacity="0.90" />
-                <stop offset="50%" stopColor="#f5f0e8" stopOpacity="0.55" />
-                <stop offset="100%" stopColor="#e8dcc8" stopOpacity="0.35" />
+                <stop offset="0%" stopColor="var(--honeycomb-stop-0, #ffffff)" stopOpacity="0.90" />
+                <stop offset="50%" stopColor="var(--honeycomb-stop-1, #f5f0e8)" stopOpacity="0.55" />
+                <stop offset="100%" stopColor="var(--honeycomb-stop-2, #e8dcc8)" stopOpacity="0.35" />
               </linearGradient>
             </defs>
 

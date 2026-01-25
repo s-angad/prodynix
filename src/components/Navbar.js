@@ -11,8 +11,14 @@ const Navbar = () => {
   // Performance-first: no scroll listeners.
   const navStyle = useMemo(() => {
     // Keep hero readable while letting the bee show through.
-    const baseBackground = isHome ? 'rgba(255, 255, 255, 0.52)' : 'rgba(255, 255, 255, 0.96)';
+    const baseBackground = isHome ? 'rgba(255, 255, 255, 0.72)' : 'rgba(255, 255, 255, 0.94)';
     const backgroundColor = isMobileMenuOpen ? 'rgba(255, 255, 255, 0.96)' : baseBackground;
+
+    const backgroundImage = isMobileMenuOpen
+      ? 'linear-gradient(180deg, rgba(15, 23, 42, 0.10) 0%, rgba(255, 255, 255, 0) 85%)'
+      : isHome
+        ? 'linear-gradient(180deg, rgba(15, 23, 42, 0.22) 0%, rgba(15, 23, 42, 0.10) 52%, rgba(255, 255, 255, 0) 100%)'
+        : 'linear-gradient(180deg, rgba(15, 23, 42, 0.16) 0%, rgba(255, 255, 255, 0) 85%)';
 
     return {
       position: 'fixed',
@@ -21,8 +27,9 @@ const Navbar = () => {
       right: 0,
       zIndex: 1000,
       backgroundColor,
-      borderBottom: '1px solid rgba(209, 154, 0, 0.18)',
-      transition: 'background-color 0.2s ease, border-color 0.2s ease',
+      backgroundImage,
+      borderBottom: isHome ? '1px solid rgba(15, 23, 42, 0.14)' : '1px solid rgba(15, 23, 42, 0.10)',
+      transition: 'background-color 0.2s ease, border-color 0.2s ease, background-image 0.2s ease',
     };
   }, [isHome, isMobileMenuOpen]);
 
@@ -79,6 +86,7 @@ const Navbar = () => {
       {/* Main Navbar */}
       <nav
         style={navStyle}
+        className="nav-accent"
       >
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }} className="navbar-container">
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }} className="navbar-inner">
@@ -210,7 +218,7 @@ const Navbar = () => {
       />
       {/* Mobile Side Drawer */}
       <div
-        className="mobile-drawer"
+        className="mobile-drawer drawer-accent"
         style={{
           position: 'fixed',
           top: 0,

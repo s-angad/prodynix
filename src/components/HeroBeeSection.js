@@ -19,7 +19,10 @@ const HeroBeeSection = () => {
   return (
     <section className="relative h-screen w-full overflow-visible canvas-chamber">
       {/* Three.js Canvas Layer (z-10) */}
-      <div className="absolute inset-0 z-10 overflow-visible glass-panel honeycomb-stage">
+      <div className="absolute inset-0 z-10 overflow-visible glass-panel honeycomb-stage bg-hero-dark">
+        {/* Subtle dark vignette behind the bee for contrast (no model changes). */}
+        <div className="absolute inset-0 z-0 pointer-events-none bee-vignette" aria-hidden="true" />
+
         {/* Honeycomb clusters (canvas-only): visible over canvas, under hero text */}
         <div className="absolute inset-0 z-[30] pointer-events-none" aria-hidden="true">
           <HoneycombClusters />

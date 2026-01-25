@@ -27,7 +27,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-bee-darker border-t border-bee-slate-700/30 safe-bottom">
+    <footer className="bg-bee-darker footer-accent border-t border-bee-slate-700/30 safe-bottom">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer */}
         <div className="py-10 sm:py-12 lg:py-16">

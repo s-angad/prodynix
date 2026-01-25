@@ -84,8 +84,11 @@ const Home = () => {
 
       <HeroBeeSection />
 
+      {/* Subtle dark-accent separator (light-first hierarchy) */}
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-bee-slate-800/20 to-transparent" aria-hidden="true" />
+
       {/* About Section */}
-      <section className="py-16 sm:py-20 lg:py-32 bg-bee-darker">
+      <section className="py-16 sm:py-20 lg:py-32 bg-light">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center">
             {/* Content */}
@@ -133,7 +136,7 @@ const Home = () => {
       </section>
 
       {/* Solution Areas Section */}
-      <section className="py-16 sm:py-20 lg:py-32 bg-bee-dark">
+      <section className="py-16 sm:py-20 lg:py-32 bg-dark dark-accent-zone">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             subtitle="What We Build"
@@ -151,7 +154,7 @@ const Home = () => {
                       whileHover={{ scale: 1.05, y: -10 }}
                       transition={{ type: 'spring', stiffness: 300 }}
                     >
-                      <Card className="h-full group cursor-pointer overflow-hidden">
+                      <Card className="h-full group cursor-pointer overflow-hidden card-dark">
                         <div className="relative h-48 mb-4 -mx-6 -mt-6 mb-4 overflow-hidden rounded-lg">
                           <img
                             src={solution.image}
@@ -182,7 +185,7 @@ const Home = () => {
       </section>
 
       {/* Featured Product Section */}
-      <section className="py-16 sm:py-20 lg:py-32 bg-bee-navy">
+      <section className="py-16 sm:py-20 lg:py-32 bg-light">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0 }}
@@ -251,7 +254,7 @@ const Home = () => {
       </section>
 
       {/* Analytics & Metrics Section */}
-      <section className="py-16 sm:py-20 lg:py-32 bg-bee-navy">
+      <section className="py-16 sm:py-20 lg:py-32 bg-dark dark-accent-zone">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             subtitle="Performance"
@@ -332,7 +335,7 @@ const Home = () => {
       </section>
 
       {/* Our Work Preview Section */}
-      <section className="py-16 sm:py-20 lg:py-28 bg-bee-darker">
+      <section className="py-16 sm:py-20 lg:py-28 bg-light">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             subtitle="Our Work"
@@ -350,7 +353,7 @@ const Home = () => {
                     whileHover={{ scale: 1.05, y: -5 }}
                     transition={{ type: 'spring', stiffness: 300 }}
                   >
-                    <Card className="h-full group cursor-pointer overflow-hidden">
+                    <Card className="h-full group cursor-pointer overflow-hidden card-dark">
                       <div className="relative h-40 -mx-6 -mt-6 mb-4 overflow-hidden rounded-lg">
                         <img
                           src="/images/solutions-automation.jpg"
@@ -387,7 +390,7 @@ const Home = () => {
                     whileHover={{ scale: 1.05, y: -5 }}
                     transition={{ type: 'spring', stiffness: 300 }}
                   >
-                    <Card className="h-full group cursor-pointer overflow-hidden">
+                    <Card className="h-full group cursor-pointer overflow-hidden card-dark">
                       <div className="relative h-40 -mx-6 -mt-6 mb-4 overflow-hidden rounded-lg">
                         <img
                           src="/images/howwework-project-1.jpg"
@@ -424,7 +427,7 @@ const Home = () => {
                     whileHover={{ scale: 1.05, y: -5 }}
                     transition={{ type: 'spring', stiffness: 300 }}
                   >
-                    <Card className="h-full group cursor-pointer overflow-hidden">
+                    <Card className="h-full group cursor-pointer overflow-hidden card-dark">
                       <div className="relative h-40 -mx-6 -mt-6 mb-4 overflow-hidden rounded-lg">
                         <img
                           src="/images/solutions-custom.jpg"
@@ -472,7 +475,7 @@ const Home = () => {
       </section>
 
       {/* Meet the Founders Section */}
-      <section className="py-16 sm:py-20 lg:py-28 bg-bee-dark">
+      <section className="py-16 sm:py-20 lg:py-28 bg-dark dark-accent-zone">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             subtitle="The Team"
@@ -544,7 +547,7 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 sm:py-20 lg:py-32 bg-bee-navy">
+      <section className="py-16 sm:py-20 lg:py-32 bg-light">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
