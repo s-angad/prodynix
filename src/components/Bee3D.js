@@ -39,8 +39,9 @@ export function Bee3D({ onHoverChange, ...props }) {
     modelScene.traverse((child) => {
       if (!child.isMesh) return;
 
-      // Shadows are disabled at the renderer level for performance/stability.
-      child.castShadow = false;
+      // Keep the model appearance unchanged: allow casting a ground shadow,
+      // but don't receive shadows (avoids self-shadow/lighting changes).
+      child.castShadow = true;
       child.receiveShadow = false;
 
 

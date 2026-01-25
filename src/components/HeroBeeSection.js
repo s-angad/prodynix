@@ -33,6 +33,7 @@ const HeroBeeSection = () => {
             // Performance-first renderer settings
             frameloop="always"
             dpr={dpr}
+            shadows={{ type: THREE.PCFShadowMap }}
             gl={{
               antialias: true,
               alpha: true,
@@ -73,10 +74,36 @@ const HeroBeeSection = () => {
               target={[2.1, -1.15, -0.6]}
             />
 
-            {/* Lighting (shadows disabled for stability/perf across browsers) */}
+            {/* Lighting (ground shadow restored; model does not receive shadows) */}
             <ambientLight intensity={3} />
-            <directionalLight position={[6, 6, 6]} intensity={2.2} />
+            <directionalLight
+              position={[6, 6, 6]}
+              intensity={2.2}
+              castShadow
+              shadow-mapSize={[16384, 16384]}
+              shadow-bias={-0.00015}
+              shadow-normalBias={0.02}
+              shadow-radius={0}
+              shadow-camera-near={0.5}
+              shadow-camera-far={50}
+
+              shadow-camera-left={-30}
+              shadow-camera-right={30}
+              shadow-camera-top={30}
+              shadow-camera-bottom={-30}
+            />
             <hemisphereLight intensity={0.5} groundColor="#0b1220" />
+
+            {/* Invisible receiver plane: renders only the bee shadow */}
+            <mesh
+              position={[2.1, -3.85, -0.6]}
+              rotation={[-Math.PI / 2, 0, 0]}
+              receiveShadow
+            >
+              {/* Large receiver so the shadow can't hit the edge and clip */}
+              <planeGeometry args={[120, 120]} />
+              <shadowMaterial transparent opacity={0.22} />
+            </mesh>
           </Canvas>
         </div>
       </div>
