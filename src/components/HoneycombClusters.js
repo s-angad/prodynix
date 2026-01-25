@@ -280,88 +280,79 @@ const GROUPS = (() => {
 })();
 
 const HoneycombClusters = () => {
-  const axialToPixel = (q, r, radius) => {
-    // Pointy-top axial to pixel
-    const x = radius * Math.sqrt(3) * (q + r / 2);
-    const y = radius * 1.5 * r;
-    return { x, y };
-  };
-
-  /**
-   * Render a single hexagon SVG shape with 3D depth
-   */
-  const renderHexagon = (hex, size = 60, groupId = '') => {
-    const radius = size / 2;
-    const pos = axialToPixel(hex.q, hex.r, radius);
-    const points = [];
-    
-    // Generate hexagon points (6-sided polygon)
-    for (let i = 0; i < 6; i++) {
-      const angle = (i * 60 - 90) * (Math.PI / 180);
-      const x = radius * Math.cos(angle);
-      const y = radius * Math.sin(angle);
-      points.push([x, y]);
-    }
-    
-    const polygonPoints = points.map(p => p.join(',')).join(' ');
-
-    const gradientId = `hexGradient-${groupId}`;
-    
-    return (
-      <g
-        key={`hex-${groupId}-${hex.q}-${hex.r}`}
-        transform={`translate(${pos.x}, ${pos.y})`}
-      >
-        {/* Hexagon polygon with soft gradient fill */}
-        <polygon
-          points={polygonPoints}
-          fill={`url(#${gradientId})`}
-          fillOpacity="0.72"
-          stroke="#b56f06"
-          strokeWidth="1.6"
-          strokeOpacity="0.84"
-        />
-
-        {/* Subtle highlight stroke (embossed edge) */}
-        <polygon
-          points={polygonPoints}
-          fill="none"
-          stroke="#ffffff"
-          strokeWidth="1.0"
-          strokeOpacity="0.36"
-        />
-      </g>
-    );
-  };
-
-  /**
-   * Generate complete JSX for all clusters
-   */
-  const getGroupHexes = (group) => {
-    const merged = new Map();
-
-    group.parts.forEach((part) => {
-      const base = CLUSTER_CONFIGS[part.layout] || [];
-      const offsetQ = part.offset?.q ?? 0;
-      const offsetR = part.offset?.r ?? 0;
-
-      base.forEach((hex) => {
-        const q = hex.q + offsetQ;
-        const r = hex.r + offsetR;
-        const key = `${q},${r}`;
-        const existing = merged.get(key);
-
-        // If a hex position overlaps, keep the one with greater depth.
-        if (!existing || (hex.depth ?? 0) > (existing.depth ?? 0)) {
-          merged.set(key, { q, r, depth: hex.depth });
-        }
-      });
-    });
-
-    return Array.from(merged.values());
-  };
-
   const clusters = useMemo(() => {
+    const axialToPixel = (q, r, radius) => {
+      // Pointy-top axial to pixel
+      const x = radius * Math.sqrt(3) * (q + r / 2);
+      const y = radius * 1.5 * r;
+      return { x, y };
+    };
+
+    const renderHexagon = (hex, size = 60, groupId = '') => {
+      const radius = size / 2;
+      const pos = axialToPixel(hex.q, hex.r, radius);
+      const points = [];
+
+      // Generate hexagon points (6-sided polygon)
+      for (let i = 0; i < 6; i++) {
+        const angle = (i * 60 - 90) * (Math.PI / 180);
+        const x = radius * Math.cos(angle);
+        const y = radius * Math.sin(angle);
+        points.push([x, y]);
+      }
+
+      const polygonPoints = points.map((p) => p.join(',')).join(' ');
+      const gradientId = `hexGradient-${groupId}`;
+
+      return (
+        <g
+          key={`hex-${groupId}-${hex.q}-${hex.r}`}
+          transform={`translate(${pos.x}, ${pos.y})`}
+        >
+          <polygon
+            points={polygonPoints}
+            fill={`url(#${gradientId})`}
+            fillOpacity="0.72"
+            stroke="#b56f06"
+            strokeWidth="1.6"
+            strokeOpacity="0.84"
+          />
+
+          <polygon
+            points={polygonPoints}
+            fill="none"
+            stroke="#ffffff"
+            strokeWidth="1.0"
+            strokeOpacity="0.36"
+          />
+        </g>
+      );
+    };
+
+    const getGroupHexes = (group) => {
+      const merged = new Map();
+
+      group.parts.forEach((part) => {
+        const base = CLUSTER_CONFIGS[part.layout] || [];
+        const offsetQ = part.offset?.q ?? 0;
+        const offsetR = part.offset?.r ?? 0;
+
+        base.forEach((hex) => {
+          const q = hex.q + offsetQ;
+          const r = hex.r + offsetR;
+          const key = `${q},${r}`;
+          const existing = merged.get(key);
+
+          // If a hex position overlaps, keep the one with greater depth.
+          if (!existing || (hex.depth ?? 0) > (existing.depth ?? 0)) {
+            merged.set(key, { q, r, depth: hex.depth });
+          }
+        });
+      });
+
+      return Array.from(merged.values());
+    };
+
     return GROUPS.map((group) => {
       const hexes = getGroupHexes(group);
       const scale = typeof group.scale === 'number' ? group.scale : 1;
