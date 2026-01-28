@@ -90,7 +90,7 @@ const Work = () => {
       </Helmet>
 
       {/* Hero Section */}
-      <section className="relative min-h-[60vh] flex items-center justify-center bg-hero-dual-vignette bg-grid py-12 sm:py-16 lg:py-20">
+      <section className="relative min-h-[60vh] flex items-center justify-center bg-hero-dual-vignette bg-grid py-12 sm:py-16 lg:py-20 section-fade-bottom">
 
         <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-bee-white leading-tight mb-4 sm:mb-6">
@@ -103,7 +103,7 @@ const Work = () => {
       </section>
 
       {/* Category Filter */}
-      <section className="py-8 sm:py-10 lg:py-12 bg-bee-darker">
+      <section className="py-8 sm:py-10 lg:py-12 bg-bee-darker section-fade-top section-fade-bottom">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap gap-2 sm:gap-3 justify-center">
             {categories.map((category) => (
@@ -124,7 +124,7 @@ const Work = () => {
       </section>
 
       {/* Projects Grid */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-bee-darker">
+      <section className="py-12 sm:py-16 lg:py-20 bg-bee-darker section-fade-top section-fade-bottom">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {filteredProjects.map((project) => (
@@ -194,7 +194,7 @@ const Work = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-hero-gradient relative">
+      <section className="py-12 sm:py-16 lg:py-20 bg-hero-gradient relative section-fade-top">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-1/2 left-1/3 w-64 sm:w-80 h-64 sm:h-80 bg-bee-yellow/5 rounded-full blur-3xl"></div>
         </div>

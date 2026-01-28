@@ -112,7 +112,7 @@ const Navbar = () => {
                 <img 
                   src={logo} 
                   alt="Bixxy Bee Logo" 
-                  className="logo-img"
+                  className="logo-img img-bounce"
                   style={{ 
                     objectFit: 'contain',
                     position: 'relative',
@@ -269,6 +269,7 @@ const Navbar = () => {
               <img 
                 src={logo} 
                 alt="Bixxy Bee Logo" 
+                className="img-bounce"
                 style={{ 
                   width: '56px', 
                   height: '56px', 

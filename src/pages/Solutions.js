@@ -143,7 +143,7 @@ const Solutions = () => {
         <meta name="description" content="Business automation, AI solutions, and custom projects. Bixxy Bee delivers technology that solves real problems for gyms, clinics, and enterprises." />
       </Helmet>
       {/* Hero Section */}
-      <section className="relative py-16 sm:py-20 lg:py-32 bg-hero-gradient bg-grid">
+      <section className="relative py-16 sm:py-20 lg:py-32 bg-hero-gradient bg-grid section-fade-bottom">
         <div className="absolute inset-0 overflow-hidden hidden sm:block">
           <div className="absolute top-1/4 right-1/4 w-64 sm:w-80 lg:w-96 h-64 sm:h-80 lg:h-96 bg-bee-yellow/10 rounded-full blur-3xl"></div>
         </div>

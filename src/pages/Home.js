@@ -6,6 +6,8 @@ import { Button, Card, SectionHeading, HeroBeeSection } from '../components';
 import AnimationWrappers from '../components/Animations/AnimationWrappers';
 import founder1 from '../assets/founder1.jpg';
 import founder2 from '../assets/founder2.jpg';
+import { shadow } from 'three/tsl';
+import Background from 'three/src/renderers/common/Background.js';
 
 
 // Icons for solution areas
@@ -88,7 +90,7 @@ const Home = () => {
       <div className="h-px w-full bg-gradient-to-r from-transparent via-bee-slate-800/20 to-transparent" aria-hidden="true" />
 
       {/* About Section */}
-      <section className="py-16 sm:py-20 lg:py-32 bg-light">
+      <section className="py-16 sm:py-20 lg:py-32 bg-light section-fade-bottom">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center">
             {/* Content */}
@@ -119,9 +121,9 @@ const Home = () => {
 
             {/* Visual Element */}
             <AnimationWrappers.SlideInRight delay={0.2}>
-              <div className="relative">
+              <div className="relative img-bouncey">
                 <motion.img
-                  src="/images/home-team.jpg"
+                  src="/images/h1.jpg"
                   alt="Our team working"
                   animate={{ y: [0, -15, 0] }}
                   transition={{ duration: 4, repeat: Infinity }}
@@ -136,7 +138,7 @@ const Home = () => {
       </section>
 
       {/* Solution Areas Section */}
-      <section className="py-16 sm:py-20 lg:py-32 bg-dark dark-accent-zone">
+      <section className="py-16 sm:py-20 lg:py-32 bg-dark dark-accent-zone section-fade-top section-fade-bottom">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             subtitle="What We Build"
@@ -159,12 +161,12 @@ const Home = () => {
                           <img
                             src={solution.image}
                             alt={solution.title}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                            className="w-full h-full object-cover img-bounce"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-forge-dark via-transparent to-transparent opacity-40"></div>
                         </div>
                         <div
-                            className="text-[#e7c873] mb-4 group-hover:text-bee-yellow-light transition-colors"
+                          className="text-[#e7c873] mb-4 group-hover:text-bee-yellow-light transition-colors"
                         >
                           <solution.icon />
                         </div>
@@ -185,7 +187,7 @@ const Home = () => {
       </section>
 
       {/* Featured Product Section */}
-      <section className="py-16 sm:py-20 lg:py-32 bg-light">
+      <section className="py-16 sm:py-20 lg:py-32 bg-light section-fade-top section-fade-bottom">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0 }}
@@ -218,7 +220,7 @@ const Home = () => {
                     Bixxy Bee Platform
                   </h2>
                   <p className="text-bee-slate-400 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8">
-                    Our flagship automation platform designed for gyms and businesses. Manage memberships, track attendance, handle appointments, and streamline operationsÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Âall in one place.
+                    Our flagship automation platform designed for gyms and businesses. Manage memberships, track attendance, handle appointments, and streamline operations, All in one place.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                     <Button to="/products" size="lg" fullWidthMobile>
@@ -241,11 +243,10 @@ const Home = () => {
                   className="relative"
                 >
                   <img
-                    src="/images/solutions-ai.jpg"
-                    alt="Bixxy Bee Platform"
-                    className="w-full rounded-lg shadow-2xl object-cover h-96"
+                    src="/images/ai.jpg"
+                    alt="Our team working"
+                    className="w-full rounded-xl sm:rounded-2xl shadow-2xl object-cover h-80 sm:h-96 card-glow img-bounce"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-forge-dark via-transparent to-transparent opacity-30 rounded-lg"></div>
                 </motion.div>
               </AnimationWrappers.SlideInRight>
             </div>
@@ -264,29 +265,50 @@ const Home = () => {
           />
 
           <div className="grid lg:grid-cols-3 gap-8">
+
             {/* Chart 1 */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
-              <div className="bg-gradient-to-br from-bee-slate-800/50 to-bee-navy/30 border border-bee-slate-700/50 rounded-xl overflow-hidden card-glow p-6">
-                <h3 className="text-lg font-semibold text-bee-white-100 mb-2">Performance Growth</h3>
-                <p className="text-bee-slate-400 text-sm">Average improvement across all metrics</p>
-              </div>
-            </motion.div>
+            <AnimationWrappers.SlideInRight delay={0.1}>
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                viewport={{ once: true }}
+                className="bg-gradient-to-br from-bee-slate-800/50 to-bee-navy/30 border border-bee-slate-700/50 rounded-xl overflow-hidden card img-bounce"
+              >
+                <img
+                  src="/images/performance.jpg"
+                  alt="Business Metrics"
+                  className="w-full h-64 object-cover img-bounce"
+                />
+
+                <div className="p-6">
+                  <h3 className="text-lg font-semibold text-bee-white mb-2 ">Performance Growth</h3>
+                  <p className="text-bee-slate-400 text-sm">Average improvement across all metrics</p>
+                </div>
+              </motion.div>
+            </AnimationWrappers.SlideInRight>
 
             {/* Metrics Visualization */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <div className="bg-gradient-to-br from-bee-slate-800/50 to-bee-navy/30 border border-bee-slate-700/50 rounded-xl overflow-hidden card-glow p-6">
-                <h3 className="text-lg font-semibold text-bee-white-100 mb-2">System Health</h3>
-                <p className="text-bee-slate-400 text-sm">Real-time monitoring and optimization</p>
-              </div>
-            </motion.div>
+            <AnimationWrappers.SlideInRight delay={0.1}>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="bg-gradient-to-br from-bee-slate-800/50 to-bee-navy/30 border border-bee-slate-700/50 rounded-xl overflow-hidden card-glow"
+              >
+                <img
+                  src="/images/systemhealth.png"
+                  alt="Business Metrics"
+                  className="w-full h-64 object-cover img-bounce"
+                />
+
+                <div className="p-6">
+                  <h3 className="text-lg font-semibold text-bee-white mb-2">System Health</h3>
+                  <p className="text-bee-slate-400 text-sm">Real-time monitoring and optimization</p>
+                </div>
+              </motion.div>
+            </AnimationWrappers.SlideInRight>
 
             {/* Metrics Image */}
             <AnimationWrappers.SlideInRight delay={0.1}>
@@ -298,12 +320,12 @@ const Home = () => {
                 className="bg-gradient-to-br from-bee-slate-800/50 to-bee-navy/30 border border-bee-slate-700/50 rounded-xl overflow-hidden card-glow"
               >
                 <img
-                  src="/images/services-dashboard.jpg"
+                  src="/images/businessintelligence.png"
                   alt="Business Metrics"
-                  className="w-full h-64 object-cover"
+                  className="w-full h-64 object-cover img-bounce"
                 />
                 <div className="p-6">
-                  <h3 className="text-lg font-semibold text-bee-white-100 mb-2">Business Intelligence</h3>
+                  <h3 className="text-lg font-semibold text-bee-white mb-2">Business Intelligence</h3>
                   <p className="text-bee-slate-400 text-sm">Actionable insights for growth</p>
                 </div>
               </motion.div>
@@ -347,16 +369,17 @@ const Home = () => {
           <AnimationWrappers.StaggerContainer>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-10">
               {/* Bixxy Bee Product */}
-              <AnimationWrappers.StaggerItem>
+              <AnimationWrappers.StaggerItem >
                 <Link to="/work">
                   <motion.div
                     whileHover={{ scale: 1.05, y: -5 }}
                     transition={{ type: 'spring', stiffness: 300 }}
+                    
                   >
-                    <Card className="h-full group cursor-pointer overflow-hidden card-dark">
-                      <div className="relative h-40 -mx-6 -mt-6 mb-4 overflow-hidden rounded-lg">
+                    <Card className="h-full group cursor-pointer overflow-hidden card-dark" >
+                      <div className="relative h-40 -mx-6 -mt-6 mb-4 overflow-hidden rounded-lg" >
                         <img
-                          src="/images/solutions-automation.jpg"
+                          src="/images/platform.jpeg"
                           alt="Bixxy Bee Platform"
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                         />
@@ -367,12 +390,13 @@ const Home = () => {
                         transition={{ delay: 0.1 }}
                         viewport={{ once: true }}
                         className="flex items-center gap-2 mb-4"
+
                       >
-                        <span className="px-2 py-1 bg-bee-yellow/10 border border-bee-yellow/20 rounded text-xs text-bee-yellow font-medium">
+                        <span className="px-2 py-1 bg-bee-yellow/10 border border-bee-yellow/20 rounded text-xs text-bee-yellow font-medium" >
                           Product
                         </span>
                       </motion.div>
-                      <h3 className="text-lg font-semibold text-bee-white-100 mb-2 group-hover:text-bee-yellow transition-colors">
+                      <h3 className="text-lg font-semibold text-bee-white-100 mb-2 group-hover:text-bee-yellow transition-colors" >
                         Bixxy Bee Platform
                       </h3>
                       <p className="text-bee-slate-400 text-sm leading-relaxed">
@@ -393,7 +417,7 @@ const Home = () => {
                     <Card className="h-full group cursor-pointer overflow-hidden card-dark">
                       <div className="relative h-40 -mx-6 -mt-6 mb-4 overflow-hidden rounded-lg">
                         <img
-                          src="/images/howwework-project-1.jpg"
+                          src="/images/ai-work.jpg"
                           alt="Automation Projects"
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                         />
@@ -430,7 +454,7 @@ const Home = () => {
                     <Card className="h-full group cursor-pointer overflow-hidden card-dark">
                       <div className="relative h-40 -mx-6 -mt-6 mb-4 overflow-hidden rounded-lg">
                         <img
-                          src="/images/solutions-custom.jpg"
+                          src="/images/auto.png"
                           alt="Digital & AI Work"
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                         />
@@ -499,7 +523,7 @@ const Home = () => {
                       transition={{ duration: 3, repeat: Infinity }}
                       className="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-bee-slate-600/50 border-2 border-bee-slate-600/50 overflow-hidden mb-5 group-hover:border-bee-yellow/40 transition-colors"
                     >
-                      <img src={founder1} alt="Shvang Jagwan" className="w-full h-full object-cover" />
+                      <img src={founder1} alt="Shvang Jagwan" className="w-full h-full object-cover img-bounce" />
                     </motion.div>
                     <h3 className="text-xl sm:text-2xl font-semibold text-bee-white mb-1">
                       Shvang Jagwan
@@ -527,7 +551,7 @@ const Home = () => {
                       transition={{ duration: 3, delay: 0.5, repeat: Infinity }}
                       className="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-bee-slate-600/50 border-2 border-bee-slate-600/50 overflow-hidden mb-5 group-hover:border-bee-yellow/40 transition-colors"
                     >
-                      <img src={founder2} alt="Anagd Singh" className="w-full h-full object-cover" />
+                      <img src={founder2} alt="Anagd Singh" className="w-full h-full object-cover img-bounce" />
                     </motion.div>
                     <h3 className="text-xl sm:text-2xl font-semibold text-bee-white mb-1">
                       Anagd Singh

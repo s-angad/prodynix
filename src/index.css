@@ -1,3 +1,23 @@
+/* Bouncy image hover effect for all images */
+.img-bounce {
+  transition: transform 0.32s cubic-bezier(.22,1.15,.32,1), box-shadow 0.22s cubic-bezier(.22,1.15,.32,1);
+  will-change: transform, box-shadow;
+}
+.img-bounce:hover, .group:hover .img-bounce {
+  transform: scale(1.055) translateY(-6px) rotateZ(-0.5deg);
+  box-shadow: 0 8px 32px 0 rgba(161,107,8,0.13), 0 2px 8px 0 rgba(15,23,42,0.10);
+  z-index: 2;
+}
+
+.img-bouncey {
+  transition: transform 0.32s cubic-bezier(.22,1.15,.32,1), box-shadow 0.22s cubic-bezier(.22,1.15,.32,1);
+  will-change: transform, box-shadow;
+}
+.img-bouncey:hover, .group:hover .img-bouncey {
+  transform: scale(1.055) translateY(-6px) rotateZ(-0.5deg);
+  box-shadow: 0 8px 32px 0 rgba(161,107,8,0.13), 0 2px 8px 0 rgba(15,23,42,0.10);
+  z-index: 2;
+}
 /* Cinematic hero background: dual dark clouds, bright center */
 .bg-hero-dual-vignette {
   background: linear-gradient(
@@ -485,7 +505,7 @@ body.menu-open {
   }
 
   .text-bee-slate-400 {
-    color: #6b7280 !important;
+    color: #f3e3ba !important;
   }
 
   /*
@@ -497,14 +517,12 @@ body.menu-open {
   .bg-bee-navy { background-color: #fffaf0 !important; }
 
   .bg-bee-dark\/50 { background-color: rgba(255, 255, 255, 0.72) !important; }
-  .bg-bee-slate-700\/50 { background-color: rgba(255, 250, 240, 0.72) !important; }
+  .bg-bee-slate-700 { background-color: rgba(220, 188, 125, 0.275) !important; }
 
   .text-bee-white { color: #0f172a !important; }
-  .text-bee-white-100 { color: #0f172a !important; }
+  .text-bee-white-100 { color: #f2f5fd !important; }
 
-  .border-bee-slate-700\/50 { border-color: rgba(15, 23, 42, 0.10) !important; }
-  .border-bee-slate-700\/30 { border-color: rgba(15, 23, 42, 0.08) !important; }
-  .border-bee-slate-700\/20 { border-color: rgba(15, 23, 42, 0.06) !important; }
+  .border-bee-slate-700 { border-color: rgb(206, 156, 110) !important; }
 
   /* Lighten common dark gradients */
   .from-bee-slate-800 { --tw-gradient-from: rgba(255, 255, 255, 0.92) !important; --tw-gradient-to: rgba(255, 255, 255, 0) !important; }
@@ -806,4 +824,86 @@ body.menu-open {
   .honeycomb-clusters-container {
     display: none;
   }
+}
+
+
+/* ===== SMOOTH SECTION TRANSITIONS (CLOUDY FOG) ===== */
+
+.section-smooth {
+  position: relative;
+  isolation: isolate;
+}
+
+/* TOP cloud fade */
+.section-smooth::before {
+  content: '';
+  position: absolute;
+  top: -120px;
+  left: 0;
+  right: 0;
+  height: 120px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* BOTTOM cloud fade */
+.section-smooth::after {
+  content: '';
+  position: absolute;
+  bottom: -120px;
+  left: 0;
+  right: 0;
+  height: 120px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Light → Dark blend */
+.section-light::after {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(15, 23, 42, 0.35),
+    rgba(15, 23, 42, 0.65)
+  );
+}
+
+/* Dark → Light blend */
+.section-dark::after {
+  background: linear-gradient(
+    to bottom,
+    rgba(15, 23, 42, 0),
+    rgba(255, 255, 255, 0.45),
+    rgba(255, 255, 255, 0.85)
+  );
+}
+
+/* Top fog (same logic, reversed) */
+.section-light::before {
+  background: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.85)
+  );
+}
+
+.section-dark::before {
+  background: linear-gradient(
+    to top,
+    rgba(15, 23, 42, 0),
+    rgba(15, 23, 42, 0.85)
+  );
+}
+.section-dark::after {
+  background:
+    radial-gradient(
+      120% 80% at 50% 0%,
+      rgba(255, 255, 255, 0.25),
+      transparent 60%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(15, 23, 42, 0),
+      rgba(15, 23, 42, 0.85)
+    );
 }
