@@ -26,7 +26,7 @@ const posts = [
 const Blog = () => (
   <div className="pt-14 sm:pt-16 lg:pt-20">
     <Helmet>
-      <title>Blog & Resources | Bixxy Bee</title>
+      <title>Blog & Resources | BeeAlign</title>
       <meta name="description" content="Insights, guides, and resources on business automation, AI, and digital solutions." />
     </Helmet>
     <section className="py-16 sm:py-20 lg:py-32 bg-bee-darker">
@@ -34,7 +34,7 @@ const Blog = () => (
         <SectionHeading
           subtitle="Resources"
           title="Blog & Insights"
-          description="Latest articles, guides, and case studies from the Bixxy Bee team."
+          description="Latest articles, guides, and case studies from the BeeAlign team."
           align="center"
           className="mb-10 sm:mb-16"
         />

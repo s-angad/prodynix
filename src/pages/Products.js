@@ -18,7 +18,7 @@ const Products = () => {
     {
       step: '02',
       title: 'Configuration',
-      description: 'Bixxy Bee is configured to match your workflows, branding, and operational needs.',
+      description: 'BeeAlign is configured to match your workflows, branding, and operational needs.',
     },
     {
       step: '03',
@@ -170,24 +170,24 @@ const Products = () => {
       description: 'Manage memberships, track attendance, schedule classes, and handle payments all in one place.',
     },
     {
-      title: 'Sports Clubs',
-      description: 'Facility booking, member check-ins, and team management for sports organizations.',
+      title: 'Erp Systems',
+      description: 'Member check-ins, and team management for sports organizations.',
     },
     {
-      title: 'Wellness Studios',
-      description: 'Appointment scheduling, package tracking, and client management for yoga, pilates, and wellness centers.',
+      title: 'Appointment-Based Businesses',
+      description: 'Appointment scheduling, package tracking, and client management.',
     },
     {
-      title: 'Training Facilities',
-      description: 'Personal training sessions, progress tracking, and schedule management for trainers and clients.',
+      title: 'Automation and Ai',
+      description: 'Automations, tracking, and schedule management using ai and automation tools.',
     },
   ];
 
   return (
     <div>
       <Helmet>
-        <title>Products | Bixxy Bee Platform</title>
-        <meta name="description" content="Bixxy Bee Platform - Comprehensive gym and business automation. Member management, check-ins, scheduling, and payments all in one place." />
+        <title>Products | BeeAlign Platform</title>
+        <meta name="description" content="BeeAlign Platform - Comprehensive gym and business automation. Member management, check-ins, scheduling, and payments all in one place." />
       </Helmet>
       {/* Hero Section */}
       <section className="relative py-16 sm:py-20 lg:py-32 bg-hero-gradient bg-grid overflow-hidden">
@@ -204,11 +204,11 @@ const Products = () => {
                 Our Flagship Products
               </span>
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-bee-white leading-tight mb-4 sm:mb-6">
-                Bixxy Bee{' '}
+                BeeAlign{' '}
                 <span className="text-highlight">Platform</span>
               </h1>
               <p className="text-base sm:text-lg lg:text-xl leading-relaxed mb-6 sm:mb-8 text-bee-slate-700" style={{ fontWeight: 600 }}>
-                A comprehensive automation platform designed for gyms, fitness centers, and businesses that need reliable member management, scheduling, and operational tools.
+                A comprehensive automation and system deisgn platform designed for  every kind of buisness, startups and centers that need reliable member management, scheduling, and operational tools.
               </p>
               {/* Improved Flagship Products List UI */}
               <div className="relative mb-6">
@@ -261,7 +261,7 @@ const Products = () => {
                     <div className="w-8 h-8 sm:w-10 sm:h-10 bg-bee-yellow/30 rounded-lg flex items-center justify-center">
                       <span className="text-bee-black font-bold text-sm sm:text-base">P</span>
                     </div>
-                    <span className="text-bee-black font-semibold text-sm sm:text-base">Bixxy Bee Dashboard</span>
+                    <span className="text-bee-black font-semibold text-sm sm:text-base">BeeAlign Dashboard</span>
                   </div>
                   <div className="flex space-x-1.5 sm:space-x-2">
                     <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-bee-gray-500 rounded-full"></div>
@@ -324,7 +324,7 @@ const Products = () => {
           <SectionHeading
             subtitle="Platform Features"
             title="Everything You Need to Run Your Business"
-            description="Bixxy Bee combines essential tools into one cohesive platform, eliminating the need for multiple disconnected systems."
+            description="BeeAlign combines essential tools into one cohesive platform, eliminating the need for multiple disconnected systems."
             className="mb-10 sm:mb-16"
           />
 
@@ -479,9 +479,9 @@ const Products = () => {
 
             <div className="relative text-center max-w-3xl mx-auto">
               <SectionHeading
-                subtitle="Ready to See Bixxy Bee in Action?"
+                subtitle="Ready to See BeeAlign in Action?"
                 title="Schedule a Personalized Demo"
-                description="See how Bixxy Bee can streamline your operations. We'll walk you through the platform and show you exactly how it fits your business."
+                description="See how BeeAlign can streamline your operations. We'll walk you through the platform and show you exactly how it fits your business."
                 className="mb-8 sm:mb-10"
               />
               <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">

@@ -615,7 +615,9 @@ body.menu-open {
   .text-bee-dark {
     color: #0a0e27 !important;
   }
-
+  .text-bee-brown {
+    color: brown !important;
+  }
   .text-bee-slate-800 {
     color: #1f2937 !important;
   }
@@ -632,6 +634,16 @@ body.menu-open {
     color: #f3e3ba !important;
   }
 
+  .text-bee-slate-10000 {
+    color: #000000 !important;
+  }
+
+  .text-bee-b{
+    color: #a36f0a;
+  }
+  .text-bee-br{
+    color: palevioletred;
+  }
   /*
     Light theme overrides for existing Tailwind color utilities.
     This lets us flip the site to a white/honey palette without rewriting every class.
@@ -650,6 +662,7 @@ body.menu-open {
 
   .text-bee-white { color: #0f172a !important; }
   .text-bee-white-100 { color: #000000 !important; }
+  .text-bee-w {color: white;}
 
   .border-bee-slate-700 { border-color: rgb(206, 156, 110) !important; }
 

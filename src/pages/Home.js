@@ -89,7 +89,7 @@ const Home = () => {
         company: 'Graphic Era',
         rating: 5,
         quote:
-          'Bixxy Bee built our timetable software and smart scheduler. Timetables, clashes, and updates are now streamlined, accurate, and easy to manage across teams.',
+          'BeeAlign built our timetable software and smart scheduler. Timetables, clashes, and updates are now streamlined, accurate, and easy to manage across teams.',
       },
       {
         name: 'Neha Sharma',
@@ -105,7 +105,7 @@ const Home = () => {
         company: 'PulseFit Gym (Dubai)',
         rating: 4.5,
         quote:
-          'We partnered with Bixxy Bee for our gym automation software—memberships, check-ins, billing, and attendance. The rollout was smooth and the system is fast, reliable, and easy for staff to use.',
+          'We partnered with BeeAlign for our gym automation software—memberships, check-ins, billing, and attendance. The rollout was smooth and the system is fast, reliable, and easy for staff to use.',
       },
       {
         name: 'Isha Verma',
@@ -288,7 +288,7 @@ const Home = () => {
     {
       icon: Icons.Product,
       title: 'Product Solutions',
-      description: 'Ready-to-deploy platforms like Bixxy Bee that transform how businesses manage their daily operations.',
+      description: 'Ready-to-deploy platforms like BeeAlign that transform how businesses manage their daily operations.',
       link: '/products',
       image: '/images/home-solutions-products.jpg',
     },
@@ -311,8 +311,8 @@ const Home = () => {
   return (
     <div>
       <Helmet>
-        <title>Bixxy Bee | Intelligent Business Automation Solutions</title>
-        <meta name="description" content="Bixxy Bee builds intelligent automation solutions for gyms, clinics, and businesses. Custom software, AI solutions, and ready-to-deploy platforms that transform operations." />
+        <title>BeeAlign | Intelligent Business Automation Solutions</title>
+        <meta name="description" content="BeeAlign builds intelligent automation solutions for gyms, clinics, and businesses. Custom software, AI solutions, and ready-to-deploy platforms that transform operations." />
       </Helmet>
 
       <HeroBeeSection />
@@ -333,12 +333,12 @@ const Home = () => {
                   align="left"
                   className="mb-6"
                 />
-                <div className="space-y-4 text-slate-200 text-base sm:text-lg leading-relaxed">
-                  <p>
-                    Bixxy Bee isn't your typical tech company. We're engineers, problem-solvers, and automation specialists focused on building solutions that actually work in the real world.
+                <div className="space-y-4 text-bee-slate-400 text-base sm:text-lg leading-relaxed">
+                  <p style={{color: "rgb(151, 112, 34)"}}>
+                    BeeAlign isn't your typical tech company. We're engineers, problem-solvers, and automation specialists focused on building solutions that actually work in the real world.
                   </p>
-                  <p>
-                    Whether it's automating a gym's membership management, building a clinic's appointment system, or creating custom business tools—we approach every project with the same commitment to quality and reliability.
+                  <p style={{color: "rgb(151, 112, 34)"}}>
+                    Whether it's automation, management, appointment system, or creating custom business tools—we approach every project with the same commitment to quality and reliability.
                   </p>
                 </div>
                 <div className="mt-6 sm:mt-8">
@@ -449,7 +449,7 @@ const Home = () => {
                     Featured Product
                   </motion.span>
                   <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6">
-                    Bixxy Bee Platform
+                    BeeAlign Platform
                   </h2>
                   <p className="text-slate-300 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8">
                     Our flagship automation platform designed for gyms and businesses. Manage memberships, track attendance, handle appointments, and streamline operations, All in one place.
@@ -596,7 +596,7 @@ const Home = () => {
 
           <AnimationWrappers.StaggerContainer>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-10">
-              {/* Bixxy Bee Product */}
+              {/* BeeAlign Product */}
               <AnimationWrappers.StaggerItem >
                 <Link to="/work#portfolio">
                   <motion.div
@@ -608,7 +608,7 @@ const Home = () => {
                       <div className="relative h-40 -mx-6 -mt-6 mb-4 overflow-hidden rounded-lg" >
                         <img
                           src="/images/platform.jpeg"
-                          alt="Bixxy Bee Platform"
+                          alt="BeeAlign Platform"
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                         />
                       </div>
@@ -625,7 +625,7 @@ const Home = () => {
                         </span>
                       </motion.div>
                       <h3 className="text-lg font-semibold text-bee-white-100 mb-2 group-hover:text-bee-yellow transition-colors" >
-                        Bixxy Bee Platform
+                        BeeAlign Platform
                       </h3>
                       <p className="text-bee-slate-400 text-sm leading-relaxed">
                         Gym and business automation platform handling memberships, check-ins, and scheduling.
@@ -954,7 +954,7 @@ const Home = () => {
           <SectionHeading
             subtitle="The Team"
             title="Meet the Founders"
-            description="The people behind Bixxy Bee, committed to building technology that works."
+            description="The people behind BeeAlign, committed to building technology that works."
             className="mb-10 sm:mb-14"
           />
 
@@ -978,10 +978,10 @@ const Home = () => {
                     <h3 className="text-xl sm:text-2xl font-semibold text-bee-white mb-1">
                       Shvang Jagwan
                     </h3>
-                    <p className="text-bee-yellow font-medium text-sm sm:text-base mb-3">
+                    <p className="text-bee-b font-medium text-sm sm:text-base mb-3">
                       Co-Founder & Engineering
                     </p>
-                    <p className="text-bee-slate-400 text-sm sm:text-base leading-relaxed max-w-xs">
+                    <p className="text-bee-w text-sm sm:text-base leading-relaxed max-w-xs">
                       Focused on building scalable automation solutions and turning complex business problems into elegant software.
                     </p>
                   </div>
@@ -1006,10 +1006,10 @@ const Home = () => {
                     <h3 className="text-xl sm:text-2xl font-semibold text-bee-white mb-1">
                       Anagd Singh
                     </h3>
-                    <p className="text-bee-yellow font-medium text-sm sm:text-base mb-3">
+                    <p className="text-bee-b font-medium text-sm sm:text-base mb-3">
                       Co-Founder & Operations
                     </p>
-                    <p className="text-bee-slate-400 text-sm sm:text-base leading-relaxed max-w-xs">
+                    <p className="text-bee-w text-sm sm:text-base leading-relaxed max-w-xs">
                       Driving business strategy and ensuring every solution delivers real value to our clients.
                     </p>
                   </div>

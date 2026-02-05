@@ -125,7 +125,7 @@ const Services = () => {
   return (
     <div className="pt-0">
       <Helmet>
-        <title>Services | Bixxy Bee</title>
+        <title>Services | BeeAlign</title>
         <meta name="description" content="Custom software development, web applications, business dashboards, and internal tools. Expert development services tailored to your business needs." />
       </Helmet>
       {/* Hero Section */}

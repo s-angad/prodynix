@@ -5,8 +5,8 @@ const Terms = () => {
   return (
     <>
       <Helmet>
-        <title>Terms of Service | Bixxy Bee</title>
-        <meta name="description" content="Bixxy Bee Terms of Service - Read our terms and conditions for using our services." />
+        <title>Terms of Service | BeeAlign</title>
+        <meta name="description" content="BeeAlign Terms of Service - Read our terms and conditions for using our services." />
       </Helmet>
       
       <div className="pt-16 sm:pt-20 lg:pt-24">
@@ -23,7 +23,7 @@ const Terms = () => {
                 <div>
                   <h2 className="text-xl sm:text-2xl font-semibold text-bee-white-100 mb-3">1. Acceptance of Terms</h2>
                   <p className="text-bee-slate-400 leading-relaxed">
-                    By accessing and using Bixxy Bee's website and services, you accept and agree to be bound by 
+                    By accessing and using BeeAlign's website and services, you accept and agree to be bound by 
                     these Terms of Service. If you do not agree to these terms, please do not use our services.
                   </p>
                 </div>
@@ -31,7 +31,7 @@ const Terms = () => {
                 <div>
                   <h2 className="text-xl sm:text-2xl font-semibold text-bee-white-100 mb-3">2. Services</h2>
                   <p className="text-bee-slate-400 leading-relaxed">
-                    Bixxy Bee provides automation solutions, custom software development, and digital services. 
+                    BeeAlign provides automation solutions, custom software development, and digital services. 
                     The specific terms of any service engagement will be outlined in a separate agreement.
                   </p>
                 </div>
@@ -40,14 +40,14 @@ const Terms = () => {
                   <h2 className="text-xl sm:text-2xl font-semibold text-bee-white-100 mb-3">3. Intellectual Property</h2>
                   <p className="text-bee-slate-400 leading-relaxed">
                     All content on this website, including text, graphics, logos, and software, is the property 
-                    of Bixxy Bee and is protected by intellectual property laws.
+                    of BeeAlign and is protected by intellectual property laws.
                   </p>
                 </div>
 
                 <div>
                   <h2 className="text-xl sm:text-2xl font-semibold text-bee-white-100 mb-3">4. Limitation of Liability</h2>
                   <p className="text-bee-slate-400 leading-relaxed">
-                    Bixxy Bee shall not be liable for any indirect, incidental, special, or consequential damages 
+                    BeeAlign shall not be liable for any indirect, incidental, special, or consequential damages 
                     arising from your use of our website or services.
                   </p>
                 </div>
@@ -64,8 +64,8 @@ const Terms = () => {
                   <h2 className="text-xl sm:text-2xl font-semibold text-bee-white-100 mb-3">6. Contact</h2>
                   <p className="text-bee-slate-400 leading-relaxed">
                     For questions about these Terms of Service, contact us at{' '}
-                    <a href="mailto:contact@Bixxy Bee.com" className="text-bee-yellow hover:text-bee-yellow-light">
-                      contact@Bixxy Bee.com
+                    <a href="mailto:beealign@gmail.com" className="text-bee-yellow hover:text-bee-yellow-light">
+                      beealign@gmail.com
                     </a>
                   </p>
                 </div>

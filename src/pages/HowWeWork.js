@@ -82,6 +82,16 @@ const HowWeWork = () => {
     ? undefined
     : { y: -10, scale: 1.05, transition: { type: 'spring', stiffness: 320, damping: 22 } };
   const boxTap = shouldReduceMotion ? undefined : { scale: 0.99 };
+
+  // Match Home button hover (see src/components/Button.js)
+  const processCardHover = shouldReduceMotion
+    ? undefined
+    : {
+        scale: 1.05,
+        y: -6,
+        transition: { type: 'spring', stiffness: 300 },
+      };
+  const processCardTap = shouldReduceMotion ? undefined : { scale: 0.98 };
   const boxFrameClass =
     'group bg-gradient-to-br from-white via-slate-50 to-amber-50 border border-bee-slate-200/80 hover:border-bee-yellow/45 ring-1 ring-inset ring-bee-yellow/15 hover:ring-bee-yellow/25 rounded-xl sm:rounded-2xl overflow-hidden card-glow shadow-xl hover:shadow-2xl transform-gpu will-change-transform transition-[box-shadow,border-color,ring-color] duration-300 ease-out';
 
@@ -208,8 +218,8 @@ const HowWeWork = () => {
   return (
     <div className="pt-0">
       <Helmet>
-        <title>How We Work | Bixxy Bee</title>
-        <meta name="description" content="Our proven process from discovery to deployment. Learn how Bixxy Bee delivers projects with clear communication, honest timelines, and ongoing support." />
+        <title>How We Work | BeeAlign</title>
+        <meta name="description" content="Our proven process from discovery to deployment. Learn how BeeAlign delivers projects with clear communication, honest timelines, and ongoing support." />
       </Helmet>
       {/* Hero Section */}
       <section className="relative py-16 sm:py-20 lg:py-32 bg-hero-gradient bg-grid">
@@ -346,7 +356,8 @@ const HowWeWork = () => {
                         opacity: { duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: index * 0.09 },
                         filter: { duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: index * 0.09 },
                       }}
-                      whileHover={boxHover}
+                      whileHover={processCardHover}
+                      whileTap={processCardTap}
                       className="transform-gpu will-change-transform"
                       style={
                         shouldReduceMotion
@@ -420,57 +431,166 @@ const HowWeWork = () => {
         </div>
       </section>
 
-      {/* What to Expect Section */}
+      {/* What to Expect + CTA (Combined) */}
       <section className="py-16 sm:py-20 lg:py-32 bg-light">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            subtitle="Working Together"
-            title="What to Expect"
-            description="When you work with Bixxy Bee, here's what you can count on throughout the process."
-            className="mb-10 sm:mb-16"
-          />
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-stretch">
+            {/* Left: Expectations */}
+            <div>
+              <SectionHeading
+                subtitle="Working Together"
+                title="What to Expect"
+                description="When you work with BeeAlign, here's what you can count on throughout the process."
+                align="left"
+                className="mb-8 sm:mb-10"
+              />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {expectations.map((item, index) => (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 auto-rows-fr">
+                {expectations.map((item, index) => (
+                  <motion.div
+                    key={index}
+                    whileHover={processCardHover}
+                    whileTap={processCardTap}
+                    className="transform-gpu will-change-transform h-full"
+                  >
+                    <Card hover={false} className={`group ${boxFrameClass} h-full min-h-[220px] sm:min-h-[240px] flex flex-col`}>
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-bee-yellow/10 border border-bee-yellow/20 rounded-lg flex items-center justify-center text-bee-yellow mb-3 sm:mb-4 group-hover:bg-bee-yellow/20 transition-colors">
+                        {item.icon}
+                      </div>
+                      <h3 className="text-base sm:text-lg font-semibold text-bee-black mb-1 sm:mb-2">{item.title}</h3>
+                      <p className="text-bee-slate-700 text-xs sm:text-sm leading-relaxed flex-1">{item.description}</p>
+                    </Card>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right: CTA Panel */}
+            <div className="h-full">
               <motion.div
-                key={index}
-                whileHover={boxHover}
-                whileTap={boxTap}
-                className="transform-gpu will-change-transform"
+                whileHover={processCardHover}
+                whileTap={processCardTap}
+                className="transform-gpu will-change-transform h-full"
               >
-                <Card hover={false} className={`group ${boxFrameClass}`}>
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-bee-yellow/10 border border-bee-yellow/20 rounded-lg flex items-center justify-center text-bee-yellow mb-3 sm:mb-4 group-hover:bg-bee-yellow/20 transition-colors">
-                    {item.icon}
+                <Card hover={false} padding="xl" className={`${boxFrameClass} h-full flex flex-col`}>
+                  <span className="inline-block text-bee-orange font-semibold text-xs sm:text-sm tracking-wider uppercase mb-3 sm:mb-4">
+                    Ready to Start?
+                  </span>
+                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-heading leading-tight mb-3 sm:mb-4">
+                    Let's Discuss Your Project
+                  </h3>
+                  <p className="text-secondary text-base sm:text-lg leading-relaxed mb-6 sm:mb-8">
+                    Every project begins with a conversation. Tell us about your challenges and let's explore how we can help.
+                  </p>
+
+                  <div className="rounded-xl border border-bee-yellow/20 bg-bee-yellow/5 p-4 sm:p-5">
+                    <div className="text-sm font-semibold text-heading mb-3">What happens next</div>
+                    <ul className="space-y-2.5 text-sm text-bee-slate-700">
+                      <li className="flex items-start gap-2">
+                        <svg className="mt-0.5 w-4 h-4 text-bee-yellow flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span><span className="font-medium text-bee-black">15–30 min call</span> to understand your goal and scope.</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <svg className="mt-0.5 w-4 h-4 text-bee-yellow flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span><span className="font-medium text-bee-black">Clear plan</span> with milestones, timeline, and deliverables.</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <svg className="mt-0.5 w-4 h-4 text-bee-yellow flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span><span className="font-medium text-bee-black">Kickoff</span> with weekly updates and working demos.</span>
+                      </li>
+                    </ul>
+
+                    <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                      <div className="px-3 py-2 rounded-lg bg-white/70 border border-bee-yellow/15">
+                        <div className="text-[11px] font-semibold text-bee-slate-700">Response time</div>
+                        <div className="text-sm font-semibold text-heading">Within 24 hours</div>
+                      </div>
+                      <div className="px-3 py-2 rounded-lg bg-white/70 border border-bee-yellow/15">
+                        <div className="text-[11px] font-semibold text-bee-slate-700">Discovery call</div>
+                        <div className="text-sm font-semibold text-heading">Free</div>
+                      </div>
+                      <div className="px-3 py-2 rounded-lg bg-white/70 border border-bee-yellow/15">
+                        <div className="text-[11px] font-semibold text-bee-slate-700">Confidentiality</div>
+                        <div className="text-sm font-semibold text-heading">NDA available</div>
+                      </div>
+                    </div>
                   </div>
-                  <h3 className="text-base sm:text-lg font-semibold text-bee-black mb-1 sm:mb-2">{item.title}</h3>
-                  <p className="text-bee-slate-700 text-xs sm:text-sm leading-relaxed">{item.description}</p>
+
+                  <div className="mt-5 sm:mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="rounded-xl border border-bee-slate-200/70 bg-white/70 p-4 sm:p-5">
+                      <div className="text-sm font-semibold text-heading mb-3">You'll receive</div>
+                      <ul className="space-y-2.5 text-sm text-bee-slate-700">
+                        <li className="flex items-start gap-2">
+                          <svg className="mt-0.5 w-4 h-4 text-bee-yellow flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                          <span>High-level scope and a recommended approach</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <svg className="mt-0.5 w-4 h-4 text-bee-yellow flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                          <span>Rough timeline + milestones you can track</span>
+                        </li>
+                        <li className="flex items-start gap-2">
+                          <svg className="mt-0.5 w-4 h-4 text-bee-yellow flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                          <span>Clear next steps (even if we’re not the best fit)</span>
+                        </li>
+                      </ul>
+
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-bee-yellow/10 border border-bee-yellow/20 text-bee-slate-700">Automation</span>
+                        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-bee-yellow/10 border border-bee-yellow/20 text-bee-slate-700">AI</span>
+                        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-bee-yellow/10 border border-bee-yellow/20 text-bee-slate-700">Web Apps</span>
+                        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium bg-bee-yellow/10 border border-bee-yellow/20 text-bee-slate-700">Integrations</span>
+                      </div>
+                    </div>
+
+                    <div className="rounded-xl border border-bee-slate-200/70 bg-gradient-to-br from-white via-slate-50 to-amber-50 p-4 sm:p-5">
+                      <div className="flex items-start gap-3">
+                        <div className="w-10 h-10 rounded-lg bg-bee-yellow/10 border border-bee-yellow/20 flex items-center justify-center text-bee-yellow flex-shrink-0">
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 8h10M7 12h7m-7 4h10M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H7.414a1 1 0 00-.707.293L3.293 7.707A1 1 0 003 8.414V18a2 2 0 002 2z" />
+                          </svg>
+                        </div>
+                        <div>
+                          <div className="text-sm font-semibold text-heading">No fluff. Just clarity.</div>
+                          <p className="text-sm text-bee-slate-700 mt-1 leading-relaxed">
+                            We’ll keep it simple and actionable—what to build, how we’ll build it, and what it’ll take to ship.
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="mt-4 pt-4 border-t border-bee-slate-200/70">
+                        <div className="text-[11px] font-semibold text-bee-slate-700 uppercase tracking-wider">Quick tip</div>
+                        <p className="text-sm text-bee-slate-700 mt-1">
+                          Bring 1–2 examples of what you like (or competitors). It helps us estimate faster.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-auto pt-6 sm:pt-8 flex flex-col sm:flex-row gap-3 sm:gap-4">
+                    <Button to="/contact" size="lg" fullWidthMobile>
+                      Start the Conversation
+                      <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </Button>
+                    <Button to="/solutions" variant="outline" size="lg" fullWidthMobile>
+                      View Our Solutions
+                    </Button>
+                  </div>
                 </Card>
               </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 sm:py-20 lg:py-32 bg-light">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto">
-            <SectionHeading
-              subtitle="Ready to Start?"
-              title="Let's Discuss Your Project"
-              description="Every project begins with a conversation. Tell us about your challenges and let's explore how we can help."
-              className="mb-8 sm:mb-10"
-            />
-            <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
-              <Button to="/contact" size="lg" fullWidthMobile>
-                Start the Conversation
-                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Button>
-              <Button to="/solutions" variant="outline" size="lg" fullWidthMobile>
-                View Our Solutions
-              </Button>
             </div>
           </div>
         </div>

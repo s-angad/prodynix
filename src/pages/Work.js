@@ -85,8 +85,8 @@ const Work = () => {
   return (
     <div className="pt-14 sm:pt-16 lg:pt-20">
       <Helmet>
-        <title>Our Work | Bixxy Bee</title>
-        <meta name="description" content="Explore Bixxy Bee projects and case studies. See how we help businesses automate and scale with intelligent solutions." />
+        <title>Our Work | BeeAlign</title>
+        <meta name="description" content="Explore BeeAlign projects and case studies. See how we help businesses automate and scale with intelligent solutions." />
       </Helmet>
 
       {/* Hero Section */}

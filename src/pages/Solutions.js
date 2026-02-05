@@ -141,8 +141,8 @@ const Solutions = () => {
   return (
     <div className="pt-14 sm:pt-16 lg:pt-20" style={{ padding: 0, margin: 0 }}>
       <Helmet >
-        <title>Solutions | Bixxy Bee</title>
-        <meta name="description" content="Business automation, AI solutions, and custom projects. Bixxy Bee delivers technology that solves real problems for gyms, clinics, and enterprises." />
+        <title>Solutions | BeeAlign</title>
+        <meta name="description" content="Business automation, AI solutions, and custom projects. BeeAlign delivers technology that solves real problems for gyms, clinics, and enterprises." />
       </Helmet>
       {/* Hero Section (light, improved contrast) */}
       <section className="relative py-10 sm:py-12 lg:py-16 bg-hero-gradient zbg-grid section-fade-bottom" style={{ marginTop: "5vh" }}>
@@ -231,7 +231,7 @@ const Solutions = () => {
                     <span className="text-bee-yellow">{solution.icon}</span>
                     <span className="inline-block text-bee-yellow font-bold text-xl tracking-wider uppercase" style={{ letterSpacing: '0.08em' }}>{solution.subtitle}</span>
                   </div>
-                  <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-4" style={{ color: '#23272f', lineHeight: 1.1 }}>
+                  <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-4" style={{ color: '#2c232f', lineHeight: 1.1 }}>
                     {solution.title}
                   </h2>
                   <p className="text-lg sm:text-xl lg:text-2xl text-gray-700 mb-8" style={{ fontWeight: 500 }}>
@@ -281,7 +281,7 @@ const Solutions = () => {
                   <span className="inline-block text-bee-yellow font-bold text-lg sm:text-xl tracking-wider uppercase mb-2" style={{ letterSpacing: '0.08em' }}>
                     {solution.subtitle}
                   </span>
-                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-3 sm:mb-4" style={{ lineHeight: 1.1, color: solution.id === 'custom-projects' ? '#23272f' : '#f7fafc' }}>
+                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-3 sm:mb-4 text-bee-b" style={{ lineHeight: 1.1, color: '#f7fafc' }}>
                     {solution.title}
                   </h2>
                   <p className="text-base sm:text-lg leading-relaxed mb-6 sm:mb-8" style={{ color: '#4a5568', fontWeight: 500 }}>

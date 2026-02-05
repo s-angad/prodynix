@@ -5,8 +5,8 @@ const Privacy = () => {
   return (
     <>
       <Helmet>
-        <title>Privacy Policy | Bixxy Bee</title>
-        <meta name="description" content="Bixxy Bee Privacy Policy - Learn how we collect, use, and protect your personal information." />
+        <title>Privacy Policy | BeeAlign</title>
+        <meta name="description" content="BeeAlign Privacy Policy - Learn how we collect, use, and protect your personal information." />
       </Helmet>
       
       <div className="pt-16 sm:pt-20 lg:pt-24">
@@ -57,8 +57,8 @@ const Privacy = () => {
                   <h2 className="text-xl sm:text-2xl font-semibold text-bee-white-100 mb-3">5. Contact Us</h2>
                   <p className="text-bee-slate-400 leading-relaxed">
                     If you have any questions about this Privacy Policy, please contact us at{' '}
-                    <a href="mailto:contact@Bixxy Bee.com" className="text-bee-yellow hover:text-bee-yellow-light">
-                      contact@Bixxy Bee.com
+                    <a href="mailto:beealign@gmail.com" className="text-bee-yellow hover:text-bee-yellow-light">
+                      beealign@gmail.com
                     </a>
                   </p>
                 </div>

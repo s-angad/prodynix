@@ -115,7 +115,7 @@ const Navbar = () => {
                 }} />
                 <img 
                   src={logo} 
-                  alt="Bixxy Bee Logo" 
+                  alt="BeeAlign Logo" 
                   className="logo-img img-bounce"
                   style={{ 
                     objectFit: 'contain',
@@ -130,7 +130,7 @@ const Navbar = () => {
                   color: '#FFD700',
                   letterSpacing: '-0.02em',
                   lineHeight: 1,
-                }}>Bixxy Bee</span>
+                }}>BeeAlign</span>
               </div>
             </Link>
             {/* Desktop Navigation */}
@@ -238,12 +238,12 @@ const Navbar = () => {
             >
               <img
                 src={logo}
-                alt="Bixxy Bee Logo"
+                alt="BeeAlign Logo"
                 className="logo-img"
                 style={{ objectFit: 'contain' }}
               />
               <span className="brand-text" style={{ color: '#FFD700', fontWeight: 600 }}>
-                Bixxy Bee
+                BeeAlign
               </span>
             </button>
           </div>
@@ -318,7 +318,7 @@ const Navbar = () => {
               }} />
               <img 
                 src={logo} 
-                alt="Bixxy Bee Logo" 
+                alt="BeeAlign Logo" 
                 className="img-bounce"
                 style={{ 
                   width: '56px', 
@@ -334,7 +334,7 @@ const Navbar = () => {
               fontWeight: 700, 
               color: '#0F172A',
               letterSpacing: '-0.02em',
-            }}>Bixxy Bee</span>
+            }}>BeeAlign</span>
           </Link>
           <button
             type="button"

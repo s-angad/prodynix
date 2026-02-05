@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Bixxy Bee dark backgrounds
+        // BeeAlign dark backgrounds
         // Use deep navy/charcoal (avoid pure black) for a premium, calmer contrast.
         'bee-dark': '#0b1220',
         'bee-darker': '#070b12',
