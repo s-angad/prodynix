@@ -1,4 +1,4 @@
-import React, { Suspense, useMemo } from 'react';
+import React, { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import * as THREE from 'three';
@@ -8,13 +8,126 @@ import Button from './Button';
 import HoneycombClusters from './HoneycombClusters';
 
 const HeroBeeSection = () => {
+  const [heroBreakpoint, setHeroBreakpoint] = useState('desktop');
+  const cameraRef = useRef(null);
+  const [cameraReady, setCameraReady] = useState(false);
+
+  const isMobileHero = heroBreakpoint === 'mobile';
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.matchMedia) return;
+
+    const mqMobile = window.matchMedia('(max-width: 639px)');
+    const mqDesktop = window.matchMedia('(min-width: 1024px)');
+
+    const compute = () => {
+      if (mqMobile.matches) return 'mobile';
+      if (mqDesktop.matches) return 'desktop';
+      return 'tablet';
+    };
+
+    const onChange = () => setHeroBreakpoint(compute());
+    onChange();
+
+    const add = (mql) => {
+      if (!mql) return;
+      if (typeof mql.addEventListener === 'function') {
+        mql.addEventListener('change', onChange);
+        return;
+      }
+      if (typeof mql.addListener === 'function') {
+        mql.addListener(onChange);
+      }
+    };
+
+    const remove = (mql) => {
+      if (!mql) return;
+      if (typeof mql.removeEventListener === 'function') {
+        mql.removeEventListener('change', onChange);
+        return;
+      }
+      if (typeof mql.removeListener === 'function') {
+        mql.removeListener(onChange);
+      }
+    };
+
+    add(mqMobile);
+    add(mqDesktop);
+
+    return () => {
+      remove(mqMobile);
+      remove(mqDesktop);
+    };
+  }, []);
+
   const dpr = useMemo(() => {
     if (typeof window === 'undefined') return [1, 1.2];
-    // Cap DPR for performance and browser compatibility.
-    const maxDpr = 1.2;
+    // Cap DPR for performance and mobile browser stability.
+    const maxDpr = isMobileHero ? 1 : 1.2;
     const current = window.devicePixelRatio || 1;
     return [1, Math.min(current, maxDpr)];
-  }, []);
+  }, [isMobileHero]);
+
+  const heroModelConfig = useMemo(() => {
+    // Goal:
+    // - Mobile: bee centered lower so it appears below the headline/CTAs
+    // - Tablet: slightly less right-shifted than desktop
+    // - Desktop: keep existing placement
+    if (heroBreakpoint === 'mobile') {
+      return {
+        scale: 0.15,
+        position: [0.35, -8.35, -0.6],
+        // Less pitch so it doesn't feel like a top-down view on mobile.
+        rotation: [0.03, -Math.PI * 0.35, 0.18],
+        target: [0.1, -5.15, -0.6],
+        cameraPosition: [0.1, -5.15, 6.4],
+        fov: 48,
+      };
+    }
+
+    if (heroBreakpoint === 'tablet') {
+      return {
+        scale: 0.21,
+        position: [3.1, -4.75, -0.6],
+        rotation: [0.14, -Math.PI * 0.6, 0.24],
+        target: [1.65, -1.5, -0.6],
+        cameraPosition: [0, 1.2, 5],
+        fov: 50,
+      };
+    }
+
+    return {
+      scale: 0.23,
+      position: [4.25, -4, -0.6],
+      rotation: [0.15, -Math.PI * 0.6, 0.25],
+      target: [2.1, -1.15, -0.6],
+      cameraPosition: [0, 1.2, 5],
+      fov: 50,
+    };
+  }, [heroBreakpoint]);
+
+  const orbitPolarLimits = useMemo(() => {
+    if (heroBreakpoint !== 'mobile') return {};
+    // Keep interaction feeling horizontal on mobile (avoid overhead angle).
+    return {
+      minPolarAngle: Math.PI / 2 - 0.18,
+      maxPolarAngle: Math.PI / 2 + 0.55,
+    };
+  }, [heroBreakpoint]);
+
+  const shadowConfig = useMemo(() => {
+    // Mobile Safari/low-memory GPUs can crash with large shadow maps.
+    // Disable shadows on mobile, and keep map sizes sane elsewhere.
+    if (isMobileHero) return { enabled: false, mapSize: 0 };
+    if (heroBreakpoint === 'tablet') return { enabled: true, mapSize: 2048 };
+    return { enabled: true, mapSize: 4096 };
+  }, [heroBreakpoint, isMobileHero]);
+
+  useEffect(() => {
+    // Defensive: during viewport transitions (e.g. closing DevTools), the R3F default camera
+    // can briefly switch. Only mount controls once the camera ref is established.
+    setCameraReady(false);
+  }, [heroBreakpoint]);
 
   return (
     <section className="relative h-screen w-full overflow-visible canvas-chamber">
@@ -33,9 +146,9 @@ const HeroBeeSection = () => {
             // Performance-first renderer settings
             frameloop="always"
             dpr={dpr}
-            shadows={{ type: THREE.PCFShadowMap }}
+            shadows={shadowConfig.enabled ? { type: THREE.PCFShadowMap } : false}
             gl={{
-              antialias: true,
+              antialias: !isMobileHero,
               alpha: true,
               powerPreference: 'high-performance',
               toneMapping: THREE.ACESFilmicToneMapping,
@@ -45,42 +158,55 @@ const HeroBeeSection = () => {
             }}
             // Interactive canvas (drag to rotate)
             style={{ width: '100%', height: '100%', pointerEvents: 'auto' }}
-            camera={{ position: [0, 1.2, 5], fov: 50 }}
           >
-            <PerspectiveCamera makeDefault position={[0, 1.2, 5]} fov={50} />
+            <PerspectiveCamera
+              makeDefault
+              ref={cameraRef}
+              position={heroModelConfig.cameraPosition}
+              fov={heroModelConfig.fov}
+              onUpdate={(cam) => {
+                cam.updateProjectionMatrix();
+                if (!cameraReady) setCameraReady(true);
+              }}
+            />
 
             <Suspense fallback={null}>
               {/* Model */}
               <Bee3D
                 // Hero placement: keep the bee readable and centered on the right
-                scale={0.23}
-                position={[4.25, -4, -0.6]}
-                rotation={[0.15, -Math.PI * 0.6, 0.25]}
+                scale={heroModelConfig.scale}
+                position={heroModelConfig.position}
+                rotation={heroModelConfig.rotation}
               />
             </Suspense>
 
             {/* Lightweight controls: rotate-only, no damping (avoids extra per-frame work) */}
-            <OrbitControls
-              // “Normal” interaction: drag to rotate, wheel to zoom.
-              enabled
-              enablePan={false}
-              enableZoom={false}
-              enableDolly={false}
-              // Smooth interaction
-              enableDamping
-              dampingFactor={0.1}
-              rotateSpeed={0.4}
-              // Orbit around the bee (matches user expectation)
-              target={[2.1, -1.15, -0.6]}
-            />
+            {cameraReady && cameraRef.current ? (
+              <OrbitControls
+                // “Normal” interaction: drag to rotate, wheel to zoom.
+                enabled
+                enablePan={false}
+                enableZoom={false}
+                enableDolly={false}
+                // Smooth interaction
+                enableDamping
+                dampingFactor={0.1}
+                rotateSpeed={0.4}
+                // Ensure OrbitControls always has a stable camera instance.
+                camera={cameraRef.current}
+                // Orbit around the bee (matches user expectation)
+                target={heroModelConfig.target}
+                {...orbitPolarLimits}
+              />
+            ) : null}
 
             {/* Lighting (ground shadow restored; model does not receive shadows) */}
             <ambientLight intensity={3} />
             <directionalLight
               position={[6, 6, 6]}
               intensity={2.2}
-              castShadow
-              shadow-mapSize={[16384, 16384]}
+              castShadow={shadowConfig.enabled}
+              shadow-mapSize={shadowConfig.enabled ? [shadowConfig.mapSize, shadowConfig.mapSize] : undefined}
               shadow-bias={-0.00015}
               shadow-normalBias={0.02}
               shadow-radius={0}
@@ -95,22 +221,24 @@ const HeroBeeSection = () => {
             <hemisphereLight intensity={0.5} groundColor="#0b1220" />
 
             {/* Invisible receiver plane: renders only the bee shadow */}
-            <mesh
-              position={[2.1, -3.85, -0.6]}
-              rotation={[-Math.PI / 2, 0, 0]}
-              receiveShadow
-            >
-              {/* Large receiver so the shadow can't hit the edge and clip */}
-              <planeGeometry args={[120, 120]} />
-              <shadowMaterial transparent opacity={0.22} />
-            </mesh>
+            {shadowConfig.enabled ? (
+              <mesh
+                position={[2.1, -3.85, -0.6]}
+                rotation={[-Math.PI / 2, 0, 0]}
+                receiveShadow
+              >
+                {/* Large receiver so the shadow can't hit the edge and clip */}
+                <planeGeometry args={[120, 120]} />
+                <shadowMaterial transparent opacity={0.22} />
+              </mesh>
+            ) : null}
           </Canvas>
         </div>
       </div>
 
       {/* Foreground content */}
-      <div className="relative z-20 flex h-full items-center pointer-events-none">
-        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+      <div className="relative z-20 flex h-full items-start sm:items-center pointer-events-none">
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 pt-24 pb-12 sm:py-16">
           <div className="max-w-2xl">
             {/* Badge */}
             <div className="flex justify-center">
