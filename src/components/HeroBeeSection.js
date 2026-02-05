@@ -156,8 +156,8 @@ const HeroBeeSection = () => {
               depth: true,
               preserveDrawingBuffer: false,
             }}
-            // Interactive canvas (drag to rotate)
-            style={{ width: '100%', height: '100%', pointerEvents: 'auto' }}
+            // On mobile, keep the hero non-interactive (no drag/rotate)
+            style={{ width: '100%', height: '100%', pointerEvents: isMobileHero ? 'none' : 'auto' }}
           >
             <PerspectiveCamera
               makeDefault
@@ -181,7 +181,7 @@ const HeroBeeSection = () => {
             </Suspense>
 
             {/* Lightweight controls: rotate-only, no damping (avoids extra per-frame work) */}
-            {cameraReady && cameraRef.current ? (
+            {!isMobileHero && cameraReady && cameraRef.current ? (
               <OrbitControls
                 // “Normal” interaction: drag to rotate, wheel to zoom.
                 enabled
