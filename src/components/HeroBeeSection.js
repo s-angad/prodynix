@@ -11,8 +11,45 @@ const HeroBeeSection = () => {
   const [heroBreakpoint, setHeroBreakpoint] = useState('desktop');
   const cameraRef = useRef(null);
   const [cameraReady, setCameraReady] = useState(false);
+  const [webglSupported, setWebglSupported] = useState(true);
 
   const isMobileHero = heroBreakpoint === 'mobile';
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    // Defensive: avoid hard-crashing if the browser/GPU can’t create a WebGL context.
+    // This can happen on low-memory GPUs or when hardware acceleration is disabled.
+    const checkWebGL = () => {
+      try {
+        const canvas = document.createElement('canvas');
+        const attributes = {
+          alpha: true,
+          antialias: !isMobileHero,
+          depth: true,
+          stencil: false,
+          preserveDrawingBuffer: false,
+          powerPreference: 'high-performance',
+        };
+
+        const gl2 = canvas.getContext('webgl2', attributes);
+        if (gl2) {
+          gl2.getExtension('WEBGL_lose_context')?.loseContext?.();
+          return true;
+        }
+        const gl = canvas.getContext('webgl', attributes) || canvas.getContext('experimental-webgl', attributes);
+        if (gl) {
+          gl.getExtension('WEBGL_lose_context')?.loseContext?.();
+          return true;
+        }
+        return false;
+      } catch {
+        return false;
+      }
+    };
+
+    setWebglSupported(checkWebGL());
+  }, [isMobileHero]);
 
   useEffect(() => {
     if (typeof window === 'undefined' || !window.matchMedia) return;
@@ -142,97 +179,108 @@ const HeroBeeSection = () => {
         </div>
 
         <div className="absolute inset-0 z-10">
-          <Canvas
-            // Performance-first renderer settings
-            frameloop="always"
-            dpr={dpr}
-            shadows={shadowConfig.enabled ? { type: THREE.PCFShadowMap } : false}
-            gl={{
-              antialias: !isMobileHero,
-              alpha: true,
-              powerPreference: 'high-performance',
-              toneMapping: THREE.ACESFilmicToneMapping,
-              stencil: false,
-              depth: true,
-              preserveDrawingBuffer: false,
-            }}
-            // Interactive canvas (drag to rotate)
-            style={{ width: '100%', height: '100%', pointerEvents: 'auto' }}
-          >
-            <PerspectiveCamera
-              makeDefault
-              ref={cameraRef}
-              position={heroModelConfig.cameraPosition}
-              fov={heroModelConfig.fov}
-              onUpdate={(cam) => {
-                cam.updateProjectionMatrix();
-                if (!cameraReady) setCameraReady(true);
+          {webglSupported ? (
+            <Canvas
+              // Performance-first renderer settings
+              frameloop="always"
+              dpr={dpr}
+              shadows={shadowConfig.enabled ? { type: THREE.PCFShadowMap } : false}
+              gl={{
+                antialias: !isMobileHero,
+                alpha: true,
+                powerPreference: 'high-performance',
+                toneMapping: THREE.ACESFilmicToneMapping,
+                stencil: false,
+                depth: true,
+                preserveDrawingBuffer: false,
               }}
-            />
+              // Interactive canvas (drag to rotate)
+              style={{ width: '100%', height: '100%', pointerEvents: 'auto' }}
+              onCreated={({ gl }) => {
+                // Avoid the red error overlay if the context is lost mid-session.
+                const onLost = (e) => {
+                  e.preventDefault?.();
+                  setWebglSupported(false);
+                };
 
-            <Suspense fallback={null}>
-              {/* Model */}
-              <Bee3D
-                // Hero placement: keep the bee readable and centered on the right
-                scale={heroModelConfig.scale}
-                position={heroModelConfig.position}
-                rotation={heroModelConfig.rotation}
+                gl?.domElement?.addEventListener?.('webglcontextlost', onLost, { passive: false });
+              }}
+            >
+              <PerspectiveCamera
+                makeDefault
+                ref={cameraRef}
+                position={heroModelConfig.cameraPosition}
+                fov={heroModelConfig.fov}
+                onUpdate={(cam) => {
+                  cam.updateProjectionMatrix();
+                  if (!cameraReady) setCameraReady(true);
+                }}
               />
-            </Suspense>
 
-            {/* Lightweight controls: rotate-only, no damping (avoids extra per-frame work) */}
-            {cameraReady && cameraRef.current ? (
-              <OrbitControls
-                // “Normal” interaction: drag to rotate, wheel to zoom.
-                enabled
-                enablePan={false}
-                enableZoom={false}
-                enableDolly={false}
-                // Smooth interaction
-                enableDamping
-                dampingFactor={0.1}
-                rotateSpeed={0.4}
-                // Ensure OrbitControls always has a stable camera instance.
-                camera={cameraRef.current}
-                // Orbit around the bee (matches user expectation)
-                target={heroModelConfig.target}
-                {...orbitPolarLimits}
+              <Suspense fallback={null}>
+                {/* Model */}
+                <Bee3D
+                  // Hero placement: keep the bee readable and centered on the right
+                  scale={heroModelConfig.scale}
+                  position={heroModelConfig.position}
+                  rotation={heroModelConfig.rotation}
+                />
+              </Suspense>
+
+              {/* Lightweight controls: rotate-only, no damping (avoids extra per-frame work) */}
+              {cameraReady && cameraRef.current ? (
+                <OrbitControls
+                  // “Normal” interaction: drag to rotate, wheel to zoom.
+                  enabled
+                  enablePan={false}
+                  enableZoom={false}
+                  enableDolly={false}
+                  // Smooth interaction
+                  enableDamping
+                  dampingFactor={0.1}
+                  rotateSpeed={0.4}
+                  // Ensure OrbitControls always has a stable camera instance.
+                  camera={cameraRef.current}
+                  // Orbit around the bee (matches user expectation)
+                  target={heroModelConfig.target}
+                  {...orbitPolarLimits}
+                />
+              ) : null}
+
+              {/* Lighting (ground shadow restored; model does not receive shadows) */}
+              <ambientLight intensity={3} />
+              <directionalLight
+                position={[6, 6, 6]}
+                intensity={2.2}
+                castShadow={shadowConfig.enabled}
+                shadow-mapSize={shadowConfig.enabled ? [shadowConfig.mapSize, shadowConfig.mapSize] : undefined}
+                shadow-bias={-0.00015}
+                shadow-normalBias={0.02}
+                shadow-radius={0}
+                shadow-camera-near={0.5}
+                shadow-camera-far={50}
+
+                shadow-camera-left={-30}
+                shadow-camera-right={30}
+                shadow-camera-top={30}
+                shadow-camera-bottom={-30}
               />
-            ) : null}
+              <hemisphereLight intensity={0.5} groundColor="#0b1220" />
 
-            {/* Lighting (ground shadow restored; model does not receive shadows) */}
-            <ambientLight intensity={3} />
-            <directionalLight
-              position={[6, 6, 6]}
-              intensity={2.2}
-              castShadow={shadowConfig.enabled}
-              shadow-mapSize={shadowConfig.enabled ? [shadowConfig.mapSize, shadowConfig.mapSize] : undefined}
-              shadow-bias={-0.00015}
-              shadow-normalBias={0.02}
-              shadow-radius={0}
-              shadow-camera-near={0.5}
-              shadow-camera-far={50}
-
-              shadow-camera-left={-30}
-              shadow-camera-right={30}
-              shadow-camera-top={30}
-              shadow-camera-bottom={-30}
-            />
-            <hemisphereLight intensity={0.5} groundColor="#0b1220" />
-
-            {/* Invisible receiver plane: renders only the bee shadow */}
-            {shadowConfig.enabled ? (
-              <mesh
-                position={[2.1, -3.85, -0.6]}
-                rotation={[-Math.PI / 2, 0, 0]}
-                receiveShadow
-              >
-                {/* Large receiver so the shadow can't hit the edge and clip */}
-                <planeGeometry args={[120, 120]} />
-                <shadowMaterial transparent opacity={0.22} />
-              </mesh>
-            ) : null}
-          </Canvas>
+              {/* Invisible receiver plane: renders only the bee shadow */}
+              {shadowConfig.enabled ? (
+                <mesh
+                  position={[2.1, -3.85, -0.6]}
+                  rotation={[-Math.PI / 2, 0, 0]}
+                  receiveShadow
+                >
+                  {/* Large receiver so the shadow can't hit the edge and clip */}
+                  <planeGeometry args={[120, 120]} />
+                  <shadowMaterial transparent opacity={0.22} />
+                </mesh>
+              ) : null}
+            </Canvas>
+          ) : null}
         </div>
       </div>
 

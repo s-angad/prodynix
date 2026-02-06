@@ -123,6 +123,34 @@ const Home = () => {
   const [testimonialDirection, setTestimonialDirection] = useState(1);
   const shouldReduceMotion = useReducedMotion();
 
+  const founderCardMotion = useMemo(() => {
+    if (shouldReduceMotion) {
+      return {
+        whileHover: {},
+        whileTap: {},
+        transition: {},
+      };
+    }
+
+    return {
+      whileHover: {
+        scale: 1.05,
+        y: -6,
+        boxShadow: '0 8px 32px 0 rgba(0,0,0,0.12), 0 1.5px 8px 0 rgba(255,193,7,0.10)',
+      },
+      whileTap: { scale: 0.99 },
+      transition: { type: 'spring', stiffness: 300 },
+    };
+  }, [shouldReduceMotion]);
+
+  const founderAvatarMotion = useMemo(() => {
+    if (shouldReduceMotion) return null;
+    return {
+      animate: { y: [0, -6, 0] },
+      transition: { duration: 4.8, repeat: Infinity, ease: 'easeInOut' },
+    };
+  }, [shouldReduceMotion]);
+
   const testimonialCount = testimonials.length;
 
   const nextTestimonial = () => {
@@ -963,14 +991,16 @@ const Home = () => {
               {/* Founder 1 */}
               <AnimationWrappers.StaggerItem>
                 <motion.div
-
-                  transition={{ type: 'spring', stiffness: 300 }}
-                  className="group bg-gradient-to-br from-bee-slate-800/50 to-bee-navy/30 border border-bee-slate-700/50 rounded-xl sm:rounded-2xl p-6 sm:p-8 hover:border-bee-yellow/30 transition-all duration-300"
+                  whileHover={founderCardMotion.whileHover}
+                  whileTap={founderCardMotion.whileTap}
+                  transition={founderCardMotion.transition}
+                  style={{ willChange: 'transform' }}
+                  className="group bg-gradient-to-br from-bee-slate-800/50 to-bee-navy/30 border border-bee-slate-700/50 rounded-xl sm:rounded-2xl p-6 sm:p-8 hover:border-bee-yellow/30 transition-colors duration-200"
                 >
                   <div className="flex flex-col items-center text-center">
                     <motion.div
-                      animate={{ y: [0, -10, 0] }}
-                      transition={{ duration: 3, repeat: Infinity }}
+                      {...(founderAvatarMotion || {})}
+                      style={{ willChange: 'transform' }}
                       className="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-bee-slate-600/50 border-2 border-bee-slate-600/50 overflow-hidden mb-5 group-hover:border-bee-yellow/40 transition-colors"
                     >
                       <img src={founder1} alt="Shvang Jagwan" className="w-full h-full object-cover img-bounce" />
@@ -991,14 +1021,16 @@ const Home = () => {
               {/* Founder 2 */}
               <AnimationWrappers.StaggerItem>
                 <motion.div
-
-                  transition={{ type: 'spring', stiffness: 300 }}
-                  className="group bg-gradient-to-br from-bee-slate-800/50 to-bee-navy/30 border border-bee-slate-700/50 rounded-xl sm:rounded-2xl p-6 sm:p-8 hover:border-bee-yellow/30 transition-all duration-300"
+                  whileHover={founderCardMotion.whileHover}
+                  whileTap={founderCardMotion.whileTap}
+                  transition={founderCardMotion.transition}
+                  style={{ willChange: 'transform' }}
+                  className="group bg-gradient-to-br from-bee-slate-800/50 to-bee-navy/30 border border-bee-slate-700/50 rounded-xl sm:rounded-2xl p-6 sm:p-8 hover:border-bee-yellow/30 transition-colors duration-200"
                 >
                   <div className="flex flex-col items-center text-center">
                     <motion.div
-                      animate={{ y: [0, -10, 0] }}
-                      transition={{ duration: 3, delay: 0.5, repeat: Infinity }}
+                      {...(founderAvatarMotion ? { ...founderAvatarMotion, transition: { ...founderAvatarMotion.transition, delay: 0.4 } } : {})}
+                      style={{ willChange: 'transform' }}
                       className="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-bee-slate-600/50 border-2 border-bee-slate-600/50 overflow-hidden mb-5 group-hover:border-bee-yellow/40 transition-colors"
                     >
                       <img src={founder2} alt="Anagd Singh" className="w-full h-full object-cover img-bounce" />

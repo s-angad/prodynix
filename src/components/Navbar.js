@@ -227,24 +227,30 @@ const Navbar = () => {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '8px',
                 textDecoration: 'none',
                 background: 'none',
                 border: 'none',
-                padding: 0,
+                padding: '8px',
                 cursor: 'pointer',
+                color: '#0F172A',
               }}
               aria-label="Open menu"
             >
-              <img
-                src={logo}
-                alt="BeeAlign Logo"
-                className="logo-img"
-                style={{ objectFit: 'contain' }}
-              />
-              <span className="brand-text" style={{ color: '#FFD700', fontWeight: 600 }}>
-                BeeAlign
-              </span>
+              <svg
+                width="26"
+                height="20"
+                viewBox="0 0 26 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  d="M1 2H25M1 10H25M1 18H25"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+              </svg>
             </button>
           </div>
         </div>
