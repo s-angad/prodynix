@@ -15,6 +15,7 @@ const HeroBeeSection = () => {
   const [webglSupported, setWebglSupported] = useState(true);
 
   const isMobileHero = heroBreakpoint === 'mobile';
+  const allowInteraction = heroBreakpoint === 'desktop';
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -113,8 +114,8 @@ const HeroBeeSection = () => {
     // - Desktop: keep existing placement
     if (heroBreakpoint === 'mobile') {
       return {
-        scale: 0.15,
-        position: [0.35, -8.75, -0.6],
+        scale: 0.14,
+        position: [0.35, -8.6, -0.6],
         // Less pitch so it doesn't feel like a top-down view on mobile.
         rotation: [0.03, -Math.PI * 0.35, 0.18],
         target: [0.1, -5.15, -0.6],
@@ -196,7 +197,7 @@ const HeroBeeSection = () => {
                 preserveDrawingBuffer: false,
               }}
               // Interactive canvas (drag to rotate)
-              style={{ width: '100%', height: '100%', pointerEvents: 'auto' }}
+              style={{ width: '100%', height: '100%', pointerEvents: allowInteraction ? 'auto' : 'none' }}
               onCreated={({ gl }) => {
                 // Avoid the red error overlay if the context is lost mid-session.
                 const onLost = (e) => {
@@ -310,7 +311,7 @@ const HeroBeeSection = () => {
               <img
                 src={logo}
                 alt="BeeAlign"
-                style={{ width: isMobileHero ? '250px' : '350px', height: 'auto' }}
+                style={{ width: isMobileHero ? '150px' : '350px', height: 'auto' }}
               />
             </div>
 
