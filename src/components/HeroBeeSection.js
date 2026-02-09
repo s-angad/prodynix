@@ -6,6 +6,7 @@ import * as THREE from 'three';
 import Bee3D from './Bee3D';
 import Button from './Button';
 import HoneycombClusters from './HoneycombClusters';
+import logo from '../assets/logo-trim.png';
 
 const HeroBeeSection = () => {
   const [heroBreakpoint, setHeroBreakpoint] = useState('desktop');
@@ -304,6 +305,15 @@ const HeroBeeSection = () => {
               </div>
             </div>
 
+            {/* Logo above headline */}
+            <div className="mb-4 sm:mb-5">
+              <img
+                src={logo}
+                alt="BeeAlign"
+                style={{ width: isMobileHero ? '250px' : '350px', height: 'auto' }}
+              />
+            </div>
+
             {/* Heading */}
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-bee-white">
               Intelligent <span className="text-bee-yellow" style={{ color: "rgb(245, 179, 109)" }}>Automation</span>
@@ -312,7 +322,7 @@ const HeroBeeSection = () => {
             </h1>
 
             {/* Subheading */}
-            <p className="mt-6 text-base sm:text-lg lg:text-xl text-slate-600 leading-relaxed" style={{color: "rgb(92, 69, 38)"}}>
+            <p className="mt-6 text-base sm:text-lg lg:text-xl text-slate-600 leading-relaxed" style={{ color: "rgb(92, 69, 38)" }}>
               We build smart, reliable automation solutions that transform business operations.
             </p>
 

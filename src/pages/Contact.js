@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Button, Card } from '../components';
-const WEB3FORMS_ACCESS_KEY = "0e425289-0dd4-4968-a4f2-3eda86c3f15d";
+
+const WEB3FORMS_ACCESS_KEY =
+  process.env.REACT_APP_WEB3FORMS_ACCESS_KEY || 'c1c1dd78-f246-46ce-976d-27dab521c408';
 
 const Contact = () => {
   const shouldReduceMotion = useReducedMotion();

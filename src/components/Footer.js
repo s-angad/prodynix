@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo-trim.png';
 
 const Footer = () => {
   const year = new Date().getFullYear();

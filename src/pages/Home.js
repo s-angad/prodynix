@@ -210,13 +210,6 @@ const Home = () => {
   };
   const getAvatarIcon = (avatar) => (avatar === 'female' ? Doodles.Female : Doodles.Male);
 
-  const getInitials = (fullName) => {
-    if (!fullName) return '';
-    const parts = String(fullName).trim().split(/\s+/).filter(Boolean);
-    const initials = parts.slice(0, 2).map((p) => p[0]?.toUpperCase()).join('');
-    return initials;
-  };
-
   const renderRatingStars = (ratingValue, starColorClass, keyPrefix) => {
     const safeRating = Math.max(0, Math.min(5, Number(ratingValue) || 0));
 

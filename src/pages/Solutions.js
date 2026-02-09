@@ -1,8 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Button, Card, SectionHeading } from '../components';
-import { mx_heighttonormal } from 'three/tsl';
-import { color } from 'framer-motion';
 
 const Solutions = () => {
   const solutions = [

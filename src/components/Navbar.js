@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo-trim.png';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -94,45 +94,40 @@ const Navbar = () => {
       >
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }} className="navbar-container">
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }} className="navbar-inner">
-            {/* Logo */}
-            <Link to="/" className="navbar-logo" style={{ 
-              display: 'flex', 
-              alignItems: 'center', 
-              gap: '2px', 
-              textDecoration: 'none',
-            }}>
-              <div className="logo-wrapper" style={{
-                position: 'relative',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
-                <div className="logo-glow" style={{
-                  position: 'absolute',
-                  background: 'radial-gradient(circle, rgba(255, 215, 0, 0.25) 0%, transparent 70%)',
-                  borderRadius: '50%',
-                  opacity: 0.9,
-                }} />
-                <img 
-                  src={logo} 
-                  alt="BeeAlign Logo" 
-                  className="logo-img img-bounce"
-                  style={{ 
+            {/* Logo (image-only) */}
+            <motion.div
+              whileHover={{
+                scale: 1.05,
+                y: -6,
+              }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: 'spring', stiffness: 300 }}
+              style={{ display: 'inline-flex' }}
+            >
+              <Link
+                to="/"
+                className="navbar-logo"
+                aria-label="Go to home"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  textDecoration: 'none',
+                  background: 'transparent',
+                  padding: 0,
+                  borderRadius: 0,
+                }}
+              >
+                <img
+                  src={logo}
+                  alt="BeeAlign"
+                  className="logo-img"
+                  style={{
                     objectFit: 'contain',
-                    position: 'relative',
-                    zIndex: 1,
+                    display: 'block',
                   }}
                 />
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
-                <span className="brand-text" style={{ 
-                  fontWeight: 700, 
-                  color: '#FFD700',
-                  letterSpacing: '-0.02em',
-                  lineHeight: 1,
-                }}>BeeAlign</span>
-              </div>
-            </Link>
+              </Link>
+            </motion.div>
             {/* Desktop Navigation */}
             <div className="desktop-nav" style={{ display: 'none', alignItems: 'center', gap: '4px' }}>
               {navLinks.map((link) => (
@@ -419,11 +414,14 @@ const Navbar = () => {
       <style>{`
         /* Navbar base styles */
         .navbar-inner {
-          height: 72px;
+          height: 65px;
+        }
+        .navbar-logo {
+          margin-left: 38px;
         }
         .logo-img {
-          width: 68px;
-          height: 68px;
+
+          height: 35px;
         }
         .logo-glow {
           width: 76px;
@@ -442,11 +440,10 @@ const Navbar = () => {
             height: 64px !important;
           }
           .navbar-logo {
-            gap: 4px !important;
+            margin-left: 10px !important;
           }
           .logo-img {
-            width: 44px !important;
-            height: 44px !important;
+            height: 30px !important;
           }
           .logo-glow {
             width: 52px !important;
@@ -462,9 +459,12 @@ const Navbar = () => {
           .navbar-inner {
             height: 68px !important;
           }
+          .navbar-logo {
+            margin-left: 10px !important;
+          }
           .logo-img {
-            width: 56px !important;
-            height: 56px !important;
+            width: 80px !important;
+            height: 80px !important;
           }
           .logo-glow {
             width: 64px !important;
