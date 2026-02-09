@@ -114,7 +114,7 @@ const HeroBeeSection = () => {
     if (heroBreakpoint === 'mobile') {
       return {
         scale: 0.15,
-        position: [0.35, -8.35, -0.6],
+        position: [0.35, -8.75, -0.6],
         // Less pitch so it doesn't feel like a top-down view on mobile.
         rotation: [0.03, -Math.PI * 0.35, 0.18],
         target: [0.1, -5.15, -0.6],
