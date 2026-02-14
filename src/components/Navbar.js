@@ -321,9 +321,8 @@ const Navbar = () => {
                 src={logo} 
                 alt="BeeAlign Logo" 
                 className="img-bounce"
-                style={{ 
-                  width: '56px', 
-                  height: '56px', 
+                style={{
+                  height: '55px', 
                   objectFit: 'contain',
                   position: 'relative',
                   zIndex: 1,
@@ -335,7 +334,7 @@ const Navbar = () => {
               fontWeight: 700, 
               color: '#0F172A',
               letterSpacing: '-0.02em',
-            }}>BeeAlign</span>
+            }}></span>
           </Link>
           <button
             type="button"
